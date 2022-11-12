@@ -1,0 +1,27 @@
+.dialogs {}
+
+.title {
+    color: rgb(158, 154, 154);
+    margin: 0 0 20px 0;
+}
+
+.dialogsContent {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.users {
+    border-right: 2px solid rgb(121, 45, 151);
+    flex: 0 0 30%;
+    padding-right: 5px;
+    height: 84.4vh;
+    overflow: auto;
+}
+
+.messages {
+    flex: 0 1 70%;
+    padding-left: 20px;
+}
+
+.message {}

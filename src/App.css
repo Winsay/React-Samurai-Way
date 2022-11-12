@@ -7,3 +7,7 @@
     'header header'
     'nav main';
 }
+
+.mainWrapper {
+  grid-area: main;
+}

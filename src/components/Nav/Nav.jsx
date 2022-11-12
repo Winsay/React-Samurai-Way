@@ -1,5 +1,6 @@
 import React from "react";
 import style from './Nav.module.css'
+import { NavLink } from 'react-router-dom'
 
 
 export default function Nav() {
@@ -7,27 +8,28 @@ export default function Nav() {
         <nav className={style.nav}>
             <ul className={style.navList}>
                 <li className={style.navItem}>
-                    <a href="#s" className={style.navLink}>
+                    <NavLink to='/profile' className={({ isActive }) => (isActive ? style.active : style.navLink)} >
                         Profile
-                    </a>
+                    </NavLink>
                 </li>
+
                 <li className={style.navItem}>
-                    <a href="#s" className={style.navLink}>
+                    <NavLink to='/messages' className={({ isActive }) => (isActive ? style.active : style.navLink)}>
                         Messages
-                    </a>
+                    </NavLink>
                 </li>
                 <li className={style.navItem}>
-                    <a href="#s" className={style.navLink}>
+                    <a href="/news" className={style.navLink}>
                         News
                     </a>
                 </li>
                 <li className={style.navItem}>
-                    <a href="#s" className={style.navLink}>
+                    <a href="/music" className={style.navLink}>
                         Music
                     </a>
                 </li>
                 <li className={style.navItem}>
-                    <a href="#s" className={style.navLink}>
+                    <a href="/settings" className={style.navLink}>
                         Settings
                     </a>
                 </li>

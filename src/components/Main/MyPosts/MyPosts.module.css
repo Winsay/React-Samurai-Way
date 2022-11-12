@@ -1,0 +1,48 @@
+.mainPost {
+    margin-top: 20px;
+    font-size: 24px;
+    color: rgba(24, 23, 23, 0.792);
+    position: relative;
+}
+
+.mainPost div:first-child {
+    margin-bottom: 10px;
+}
+
+.postInp {
+    background-color: rgb(220, 216, 216);
+    width: 70vw;
+    display: block;
+    height: 5vh;
+    border: 0;
+    outline: 0;
+    margin-bottom: 30px;
+}
+
+.postInp:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.postInp:focus::-moz-placeholder {
+    color: transparent;
+}
+
+.postInp:focus:-moz-placeholde {
+    color: transparent;
+}
+
+.postInp:focus:-ms-input-placeholder {
+    color: transparent;
+}
+
+.postSend {
+    background-color: #32a33d;
+    padding: 5px 15px;
+    border: 0;
+    align-items: center;
+    position: absolute;
+    right: 213px;
+    top: 141px;
+    color: #fff;
+    cursor: pointer;
+}
