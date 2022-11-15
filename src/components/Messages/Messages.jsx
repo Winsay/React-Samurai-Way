@@ -20,21 +20,18 @@ export default function Messages() {
         { id: 3, text: 'im 21' },
     ]
 
+    const UserInfo = dataUserInfo.map((item, index) => <User key={index} userId={item.id} userName={item.name} />)
+    const Messages = dataMessage.map((item, index) => <Message key={index} messageId={item.id} messageText={item.text} />)
+
     return (
         <div className="dialogs">
             <h2 className={style.title}>DIALOGS</h2>
             <div className={style.dialogsContent}>
                 <div className={style.users}>
-                    <User userId={dataUserInfo[0].id} userName={dataUserInfo[0].name} />
-                    <User userId={dataUserInfo[1].id} userName={dataUserInfo[1].name} />
-                    <User userId={dataUserInfo[2].id} userName={dataUserInfo[2].name} />
-                    <User userId={dataUserInfo[3].id} userName={dataUserInfo[3].name} />
-                    <User userId={dataUserInfo[4].id} userName={dataUserInfo[4].name} />
+                    {UserInfo}
                 </div>
                 <div className={style.messages}>
-                    <Message messageId={dataMessage[0].id} messageText={dataMessage[0].text} />
-                    <Message messageId={dataMessage[1].id} messageText={dataMessage[1].text} />
-                    <Message messageId={dataMessage[2].id} messageText={dataMessage[2].text} />
+                    {Messages}
                 </div>
             </div>
         </div>

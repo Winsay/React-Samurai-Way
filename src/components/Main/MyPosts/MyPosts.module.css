@@ -46,3 +46,9 @@
     color: #fff;
     cursor: pointer;
 }
+
+.postsWrapper {
+    overflow: auto;
+    max-height: 15vh;
+    max-width: 71vw;
+}

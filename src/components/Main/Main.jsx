@@ -4,14 +4,14 @@ import MyPosts from "./MyPosts/MyPosts";
 import UserInfo from "./UserInfo/UserInfo";
 
 
-export default function Profile() {
+export default function Profile(props) {
     return (
         <div>
             <img className={style.anime} src="img/anime.jpg" alt="anime" />
             <div className={style.mainInfo}>
                 <UserInfo />
             </div>
-            <MyPosts />
+            <MyPosts dataPost={props.dataPost} />
         </div>
     )
 }
