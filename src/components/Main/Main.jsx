@@ -11,7 +11,7 @@ export default function Profile(props) {
             <div className={style.mainInfo}>
                 <UserInfo />
             </div>
-            <MyPosts dataPost={props.dataPost} />
+            <MyPosts dispatch={props.dispatch} dataPost={props.profilePage.dataPost} postValue={props.profilePage.postValue} />
         </div>
     )
 }

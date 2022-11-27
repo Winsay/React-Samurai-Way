@@ -1,9 +1,10 @@
 import React from "react";
 import style from './Nav.module.css'
+import Friend from "./Friends/Friend";
 import { NavLink } from 'react-router-dom'
 
 
-export default function Nav() {
+export default function Nav(props) {
     return (
         <nav className={style.nav}>
             <ul className={style.navList}>
@@ -34,6 +35,10 @@ export default function Nav() {
                     </a>
                 </li>
             </ul>
+            <h3 className={style.friendsTitle}>Friends</h3>
+            <div className={style.friends}>
+                {props.friendData.map((item, index) => <Friend imgUrl={item.img} name={item.name} key={index} id={item.id} />)}
+            </div>
         </nav>
     )
 }

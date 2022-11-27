@@ -4,24 +4,14 @@ import User from "./User/User";
 import Message from "./Message/Message"
 
 
-export default function Messages() {
+export default function Messages(props) {
+    const UserInfo = props.messagesPage.dataUserInfo.map((item, index) => <User key={index} userId={item.id} userName={item.name} />)
+    const Messages = props.messagesPage.dataMessage.map((item, index) => <Message key={index} messageId={item.id} messageText={item.text} />)
 
-    const dataUserInfo = [
-        { id: 1, name: 'Victor' },
-        { id: 2, name: 'Leo' },
-        { id: 3, name: 'Oleg' },
-        { id: 4, name: 'Pavel' },
-        { id: 5, name: 'Slava' }
-    ]
-
-    const dataMessage = [
-        { id: 1, text: 'Hello' },
-        { id: 2, text: 'How old are you?' },
-        { id: 3, text: 'im 21' },
-    ]
-
-    const UserInfo = dataUserInfo.map((item, index) => <User key={index} userId={item.id} userName={item.name} />)
-    const Messages = dataMessage.map((item, index) => <Message key={index} messageId={item.id} messageText={item.text} />)
+    // const messageText = React.createRef();
+    // function addMessage() {
+    //     (messageText.current.value.toLowerCase() === 'pasha') ? alert(`${messageText.current.value}, fuck u leatherman`) : alert(messageText.current.value)
+    // }
 
     return (
         <div className="dialogs">
@@ -32,6 +22,8 @@ export default function Messages() {
                 </div>
                 <div className={style.messages}>
                     {Messages}
+                    {/* <input ref={messageText} type="text" />
+                    <button onClick={addMessage}>Send</button> */}
                 </div>
             </div>
         </div>

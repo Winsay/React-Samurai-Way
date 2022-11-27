@@ -2,23 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import store from './state';
 import { BrowserRouter as Router } from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const rerenderAllTree = (state) => {
+    root.render(
+        <Router>
+            <App state={state} dispatch={store.dispatch.bind(store)} />
+        </Router>
+    );
+}
 
-const dataPost = [
-  { id: 1, text: 'Hey, why nobody loves me?' },
-  { id: 2, text: 'Durov return wall' },
-  { id: 3, text: 'Make America great again' },
-  { id: 4, text: 'Thank God i\'m not a Muscovite' },
-  { id: 5, text: 'Glory to Ukraine' },
-]
+rerenderAllTree(store.getState());
 
-root.render(
-  <Router>
-    <App dataPost={dataPost} />
-  </Router>
-);
-
-reportWebVitals();
+store.subscribe(rerenderAllTree);
