@@ -1,1 +1,15 @@
-.message {}
+.message:nth-child(2n-2) {
+    align-self: flex-end;
+    background-color: rgb(120, 226, 173);
+}
+
+.message {
+    height: fit-content;
+    padding: 9px 12px;
+    text-align: left;
+    margin-bottom: 10px;
+    background-color: rgb(232, 231, 231);
+    border-radius: 20px;
+    width: fit-content;
+    max-width: 90%;
+}

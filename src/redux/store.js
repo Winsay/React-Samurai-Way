@@ -1,3 +1,8 @@
+import profileReducer from "./profile-reducer";
+import messagesReducer from "./messages-reducer";
+
+
+
 const store = {
     _state: {
         profilePage: {
@@ -22,7 +27,8 @@ const store = {
                 { id: 1, text: 'Hello' },
                 { id: 2, text: 'How old are you?' },
                 { id: 3, text: 'im 21' },
-            ]
+            ],
+            messageValue: '',
         },
         friendData: [
             { img: 'img/pavel.png', name: 'Pavel', id: 1 },
@@ -40,19 +46,12 @@ const store = {
         return this._state
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            this._state.profilePage.dataPost.push({ id: 6, text: this._state.profilePage.postValue })
-            console.log(this._state.profilePage.dataPost);
-            this._state.profilePage.postValue = '';
-            this._callSubscriber(this._state);
-            console.log(this._state.profilePage.postValue)
-        } else if (action.type === 'UPDATE-POST') {
-            this._state.profilePage.postValue = action.Newtext;
-            console.log(this._state.profilePage.postValue)
-            this._callSubscriber(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.messagesPage = messagesReducer(action, this._state.messagesPage);
+        this._callSubscriber(this._state)
     }
 }
+
 
 export default store;
 window.Storage = store

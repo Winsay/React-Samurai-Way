@@ -5,13 +5,17 @@ import Message from "./Message/Message"
 
 
 export default function Messages(props) {
-    const UserInfo = props.messagesPage.dataUserInfo.map((item, index) => <User key={index} userId={item.id} userName={item.name} />)
-    const Messages = props.messagesPage.dataMessage.map((item, index) => <Message key={index} messageId={item.id} messageText={item.text} />)
+    const UserInfo = props.dataUserInfo.map((item, index) => <User key={index} userId={item.id} userName={item.name} />)
+    const Messages = props.dataMessage.map((item, index) => <Message key={index} messageId={item.id} messageText={item.text} />)
 
-    // const messageText = React.createRef();
-    // function addMessage() {
-    //     (messageText.current.value.toLowerCase() === 'pasha') ? alert(`${messageText.current.value}, fuck u leatherman`) : alert(messageText.current.value)
-    // }
+
+    function onAddMessage() {
+        props.addMessage();
+    }
+    function onChangeMessage(event) {
+        let message = event.target.value;
+        props.changeMessage(message)
+    }
 
     return (
         <div className="dialogs">
@@ -21,9 +25,13 @@ export default function Messages(props) {
                     {UserInfo}
                 </div>
                 <div className={style.messages}>
-                    {Messages}
-                    {/* <input ref={messageText} type="text" />
-                    <button onClick={addMessage}>Send</button> */}
+                    <div className={style.messagesValue}>
+                        {Messages}
+                    </div>
+                    <div className={style.messagesInput}>
+                        <input onChange={onChangeMessage} value={props.messagesValue} placeholder="Enter your message" type="text" />
+                        <button onClick={onAddMessage}>Send</button>
+                    </div>
                 </div>
             </div>
         </div>

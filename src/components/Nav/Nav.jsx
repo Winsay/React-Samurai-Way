@@ -37,7 +37,7 @@ export default function Nav(props) {
             </ul>
             <h3 className={style.friendsTitle}>Friends</h3>
             <div className={style.friends}>
-                {props.friendData.map((item, index) => <Friend imgUrl={item.img} name={item.name} key={index} id={item.id} />)}
+                {/* {props.friendData.map((item, index) => <Friend imgUrl={item.img} name={item.name} key={index} id={item.id} />)} */}
             </div>
         </nav>
     )

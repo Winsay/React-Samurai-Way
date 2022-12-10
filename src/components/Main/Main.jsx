@@ -1,6 +1,6 @@
 import React from "react";
 import style from './Main.module.css'
-import MyPosts from "./MyPosts/MyPosts";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import UserInfo from "./UserInfo/UserInfo";
 
 
@@ -11,7 +11,7 @@ export default function Profile(props) {
             <div className={style.mainInfo}>
                 <UserInfo />
             </div>
-            <MyPosts dispatch={props.dispatch} dataPost={props.profilePage.dataPost} postValue={props.profilePage.postValue} />
+            <MyPostsContainer />
         </div>
     )
 }
