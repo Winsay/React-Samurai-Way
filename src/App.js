@@ -4,21 +4,15 @@ import Main from './components/Main/Main';
 import Nav from './components/Nav/Nav';
 import { Route, Routes } from 'react-router-dom';
 import MessagesContainer from './components/Messages/MessagesContainer';
-import storeContext from './storeContext';
 
 
-function App(props) {
+function App() {
   return (
     <div className="App">
       <div className="content">
         <Header />
-        <storeContext.Consumer>
-          {
-            (store) => (
-              <Nav friendData={store.getState().friendData} />
-            )
-          }
-        </storeContext.Consumer>
+        <Nav //friendData={store.getState().friendData} 
+        />
         <div className="mainWrapper">
           <Routes>
             <Route path='/profile'
@@ -30,7 +24,7 @@ function App(props) {
           </Routes>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

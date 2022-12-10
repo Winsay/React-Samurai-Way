@@ -29,7 +29,7 @@ export default function Messages(props) {
                         {Messages}
                     </div>
                     <div className={style.messagesInput}>
-                        <input onChange={onChangeMessage} value={props.messagesValue} placeholder="Enter your message" type="text" />
+                        <input onChange={onChangeMessage} value={props.messageValue} placeholder="Enter your message" type="text" />
                         <button onClick={onAddMessage}>Send</button>
                     </div>
                 </div>

@@ -4,16 +4,16 @@ import './index.css';
 import App from './App';
 import store from './redux/redux-store';
 import { BrowserRouter as Router } from 'react-router-dom'
-import storeContext from './storeContext';
+import { Provider } from 'react-redux';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const rerenderAllTree = (state) => {
     root.render(
         <Router>
-            <storeContext.Provider value={store}>
+            <Provider store={store}>
                 <App />
-            </storeContext.Provider>
+            </Provider>
         </Router>
     );
 }
