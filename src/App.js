@@ -4,6 +4,7 @@ import Main from './components/Main/Main';
 import Nav from './components/Nav/Nav';
 import { Route, Routes } from 'react-router-dom';
 import MessagesContainer from './components/Messages/MessagesContainer';
+import UsersContainer from './components/Users/UsersContainer'
 
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
               element={
                 <MessagesContainer />
               } />
+            <Route path='/users'
+              element={<UsersContainer />} />
           </Routes>
         </div>
       </div>

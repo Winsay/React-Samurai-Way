@@ -1,0 +1,86 @@
+p {
+    margin: 0;
+}
+
+.user {
+    max-height: 150px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex: 0 1 25%;
+}
+
+.userLeft {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex: 1 1 15%;
+    margin-right: 10px;
+}
+
+.userPic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.userFollow {
+    cursor: pointer;
+    border: 0;
+    margin: 0;
+    margin-top: 10px;
+    width: 90px;
+    color: #fff;
+    padding: 5px 20px;
+    background-color: rgb(10, 97, 29);
+}
+
+.userUnfollow:hover {
+    background-color: rgb(6, 56, 17);
+}
+
+.userUnfollow {
+    cursor: pointer;
+    border: 0;
+    margin: 0;
+    margin-top: 10px;
+    width: 90px;
+    color: #fff;
+    padding: 5px 20px;
+    background-color: rgb(74, 77, 74);
+}
+
+.userRight {
+    align-self: center;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    flex: 1 1 85%;
+    color: rgb(64, 107, 150);
+    border: 2px solid rgb(64, 107, 150);
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+.userInfoTop {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.name {}
+
+.location {
+    text-align: right;
+}
+
+.userInfoBot {}
+
+.status {
+    font-weight: 500;
+}

@@ -8,19 +8,13 @@ import { Provider } from 'react-redux';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const rerenderAllTree = (state) => {
-    root.render(
-        <Router>
-            <Provider store={store}>
-                <App />
-            </Provider>
-        </Router>
-    );
-}
+root.render(
+    <Router>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </Router>
+);
 
-rerenderAllTree(store.getState());
 
-store.subscribe(() => {
-    let state = store.getState();
-    rerenderAllTree(state)
-});
+

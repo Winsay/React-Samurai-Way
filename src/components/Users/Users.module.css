@@ -1,0 +1,24 @@
+.title {}
+
+.usersList {}
+
+.userWrappwer {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-left: 20px;
+    max-width: 40vw;
+    height: 57vh;
+    overflow: auto;
+}
+
+.moreUsers {
+    display: block;
+    margin: 20px auto;
+    cursor: pointer;
+    border: none;
+    padding: 20px 40px;
+    background-color: rgb(10, 97, 29);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+}

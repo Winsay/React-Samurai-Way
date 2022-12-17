@@ -21,18 +21,22 @@ let initialState = {
 const messagesReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
-            state.dataMessage.push({ id: state.dataMessage.length + 1, text: state.messageValue });
-            console.log(state.dataMessage);
-            state.messageValue = '';
-            console.log(state.messageValue)
-            return state;
+            return {
+                ...state,
+                dataMessage: [...state.dataMessage, { id: state.dataMessage.length + 1, text: state.messageValue }],
+                messageValue: ''
+            }
+
         case CHANGE_MESSAGE:
-            state.messageValue = action.newMessage;
-            console.log(state.messageValue);
-            return state;
+            return {
+                ...state,
+                messageValue: action.newMessage
+            }
+
         default: return state;
     }
 }
+
 
 export const addMessageActionCreator = () => ({ type: ADD_MESSAGE })
 
