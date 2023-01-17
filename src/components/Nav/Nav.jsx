@@ -20,6 +20,11 @@ export default function Nav(props) {
                     </NavLink>
                 </li>
                 <li className={style.navItem}>
+                    <NavLink to='/users' className={({ isActive }) => (isActive ? style.active : style.navLink)}>
+                        Users
+                    </NavLink>
+                </li>
+                <li className={style.navItem}>
                     <a href="/news" className={style.navLink}>
                         News
                     </a>

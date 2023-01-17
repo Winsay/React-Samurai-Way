@@ -3,12 +3,35 @@ import { NavLink } from "react-router-dom";
 import style from './Header.module.css'
 
 
-export default function Header() {
+export default function Header(props) {
+
+    if (!props.authProfile) {
+        return (
+            <header className={style.header}>
+                <NavLink to={'/profile'}>
+                    <img src="https://upload.wikimedia.org/wikipedia/uk/thumb/c/c4/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%90%D0%A2%D0%91.svg/2048px-%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%90%D0%A2%D0%91.svg.png" alt="" />
+                </NavLink>
+            </header>
+        )
+
+    }
     return (
         <header className={style.header}>
             <NavLink to={'/profile'}>
                 <img src="https://upload.wikimedia.org/wikipedia/uk/thumb/c/c4/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%90%D0%A2%D0%91.svg/2048px-%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF_%D0%90%D0%A2%D0%91.svg.png" alt="" />
             </NavLink>
+            <div className={style.loginBlock}>
+                {props.isAuth ?
+                    <>
+                        <NavLink className={style.UserLogined} to={`/profile/${props.authProfile.userId}`}>
+                            <img src={!props.authProfile.photos.small ? '/img/avatar.png' : props.authProfile.photos.small} alt="User" className="userImg" />
+                            {props.login}
+                        </NavLink>
+                    </>
+                    :
+                    <NavLink className={style.loginItem} to={'/login'}>Login</NavLink>
+                }
+            </div>
         </header>
     )
 }

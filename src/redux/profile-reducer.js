@@ -1,5 +1,6 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_POST = "UPDATE-POST";
+const SET_USER_PROFILE = "SET-USER-PROFILE";
 
 
 let initialState = {
@@ -11,6 +12,7 @@ let initialState = {
         { id: 5, text: 'Glory to Ukraine' },
     ],
     postValue: '',
+    profile: null,
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -28,6 +30,12 @@ const profileReducer = (state = initialState, action) => {
                 postValue: action.newText
             }
 
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.profile
+            }
+
         default: return state
     }
 }
@@ -41,4 +49,5 @@ export const updatePostActionCreator = (text) => {
     }
 }
 
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export default profileReducer;

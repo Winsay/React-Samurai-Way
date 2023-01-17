@@ -14,7 +14,7 @@ export default function MyPosts(props) {
     }
 
     const Post = props.dataPost.map((item, index) => (
-        <MyPost id={item.id} postText={item.text} key={index} />
+        <MyPost id={item.id} postText={item.text} key={index} profile={props.profile} />
     ))
 
 

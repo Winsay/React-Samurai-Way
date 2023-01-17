@@ -8,12 +8,14 @@ import style from "./Users.module.css"
 
 
 export default function Users(props) {
-
-    if (props.userInfo.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers(response.data.items)
-        });
+    const getUsers = () => {
+        if (props.userInfo.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                props.setUsers(response.data.items)
+            });
+        }
     }
+
 
     const UserItem = props.userInfo.map((item, index) => (<User
         key={index}
@@ -32,7 +34,7 @@ export default function Users(props) {
                 <div className={style.userWrappwer}>
                     {UserItem}
                 </div>
-                <button className={style.moreUsers}>Show More</button>
+                <button onClick={getUsers} className={style.moreUsers}>Show More</button>
             </div>
         </>
     )

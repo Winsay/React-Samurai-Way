@@ -2,6 +2,24 @@
 
 .usersList {}
 
+.selectedPage {
+    background-color: rgb(188, 188, 188);
+    margin-bottom: 30px;
+}
+
+span {
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    padding: 3px;
+}
+
+span:hover {
+    background-color: rgb(225, 225, 225);
+}
+
 .userWrappwer {
     display: flex;
     flex-flow: column nowrap;

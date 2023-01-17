@@ -7,11 +7,11 @@ import UserInfo from "./UserInfo/UserInfo";
 export default function Profile(props) {
     return (
         <div>
-            <img className={style.anime} src="img/anime.jpg" alt="anime" />
+            <img className={style.anime} src="/img/anime.jpg" alt="anime" />
             <div className={style.mainInfo}>
-                <UserInfo />
+                <UserInfo profile={props.profile} />
             </div>
-            <MyPostsContainer />
+            <MyPostsContainer profile={props.profile} />
         </div>
     )
 }

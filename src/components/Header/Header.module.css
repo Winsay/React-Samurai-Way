@@ -4,9 +4,48 @@
     height: 8.8vh;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .header img {
     max-width: 70px;
     max-height: 70px;
+}
+
+.loginBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.UserLogined {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+}
+
+.loginBlock img {
+    width: 40px;
+    height: 40px;
+}
+
+
+
+.loginItem {
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgb(33, 111, 17);
+    text-decoration: none;
+}
+
+.loginItem:hover {
+    background-color: rgb(34, 121, 17);
 }
