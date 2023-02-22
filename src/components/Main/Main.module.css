@@ -7,27 +7,5 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: flex-start;
-}
-
-.infoLogo {
-    margin-right: 30px;
-}
-
-.infoLogo img {
-    display: block;
-    max-width: 250px;
-    max-height: 100%;
-}
-
-.infoText h4 {
-    margin-bottom: 30px;
-}
-
-.infoText h3 {
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.infoText h4:last-child {
-    margin-bottom: 0;
+    max-height: 250px;
 }

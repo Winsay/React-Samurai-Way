@@ -3,12 +3,6 @@
     max-height: 25vh;
 }
 
-.mainInfo {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: flex-start;
-}
-
 .infoLogo {
     margin-right: 30px;
 }
@@ -20,22 +14,40 @@
 }
 
 .infoText {
-    max-height: 250px;
+    max-height: inherit;
+}
+
+.profileNameStatus {
+    margin-bottom: 10px;
+}
+
+.profileNameStatus span {
+    overflow: hidden;
+    margin-right: 0;
+    padding: 0;
+    font-weight: 500;
+    max-width: 553px;
+}
+
+.profileInfo {
     display: flex;
-    flex-flow: column wrap;
-    column-gap: 20px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    column-gap: 30px;
+    height: 180px;
 }
 
-.infoText h4 {
-    margin: 0 0 15px 0;
-}
-
-.infoText h4:nth-child(7) {
-    margin-top: 58px;
+.profileInfo h4 {
+    display: flex;
+    align-items: flex-end;
+    padding: 0;
+    margin: 0;
+    flex: 0 1 20%;
 }
 
 .infoText h3 {
     font-size: 24px;
     font-weight: 700;
-    margin: 10px 0 15px 0;
+    margin: 0;
 }

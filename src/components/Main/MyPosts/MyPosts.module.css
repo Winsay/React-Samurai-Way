@@ -9,46 +9,72 @@
     margin-bottom: 10px;
 }
 
-.postInp {
-    background-color: rgb(220, 216, 216);
-    width: 70vw;
-    display: block;
-    height: 5vh;
-    border: 0;
-    outline: 0;
-    margin-bottom: 30px;
-}
-
-.postInp:focus::-webkit-input-placeholder {
-    color: transparent;
-}
-
-.postInp:focus::-moz-placeholder {
-    color: transparent;
-}
-
-.postInp:focus:-moz-placeholde {
-    color: transparent;
-}
-
-.postInp:focus:-ms-input-placeholder {
-    color: transparent;
-}
-
-.postSend {
-    background-color: #32a33d;
-    padding: 5px 15px;
-    border: 0;
-    align-items: center;
-    position: absolute;
-    right: 213px;
-    top: 141px;
-    color: #fff;
-    cursor: pointer;
-}
-
 .postsWrapper {
     overflow: auto;
     max-height: 15vh;
     max-width: 71vw;
+}
+
+.formPost {
+    position: relative;
+}
+
+
+
+.formPost textarea {
+    border: 0;
+    transition: border-color 1s ease;
+}
+
+.formPost textarea:focus {
+    outline: 1px solid #32a33d;
+}
+
+.formPost textarea.errorForm {
+    outline: 2px solid #D02938;
+}
+
+
+.formPost .errorMessage {
+    min-height: 20px;
+}
+
+.formPost .errorMessage p {
+    padding-left: 25px;
+    color: #D02938;
+    font-size: 12px;
+    position: relative;
+}
+
+.formPost .errorMessage p::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 16px;
+    background-image: url('../../../../public/img/warning.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.formPost input[type=submit] {
+    position: absolute;
+    font-size: 18px;
+    color: #fff;
+    background-color: #32a33d;
+    border-radius: 5px;
+    border: 0;
+    padding: 16.5px 10px;
+    right: 300px;
+    top: 0;
+    transition: background-color .5s ease-in-out;
+}
+
+.formPost input[type=submit]:hover {
+    background-color: #24742c;
+}
+
+.formPost input[type=submit]:disabled {
+    background-color: rgb(100, 100, 100);
 }

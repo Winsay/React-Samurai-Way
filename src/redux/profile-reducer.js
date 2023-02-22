@@ -1,6 +1,9 @@
+import { profileAPI } from "../api/api";
+
 const ADD_POST = "ADD-POST";
-const UPDATE_POST = "UPDATE-POST";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
+const GET_USERS_STATUS = "GET-USERS-STATUS";
+const SET_USERS_STATUS = "SET-USERS-STATUS";
 
 
 let initialState = {
@@ -11,8 +14,8 @@ let initialState = {
         { id: 4, text: 'Thank God i\'m not a Muscovite' },
         { id: 5, text: 'Glory to Ukraine' },
     ],
-    postValue: '',
     profile: null,
+    status: ''
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -20,14 +23,7 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             return {
                 ...state,
-                dataPost: [...state.dataPost, { id: state.dataPost.length + 1, text: state.postValue }],
-                postValue: '',
-            }
-
-        case UPDATE_POST:
-            return {
-                ...state,
-                postValue: action.newText
+                dataPost: [...state.dataPost, { id: state.dataPost.length + 1, text: action.postText }],
             }
 
         case SET_USER_PROFILE:
@@ -36,18 +32,46 @@ const profileReducer = (state = initialState, action) => {
                 profile: action.profile
             }
 
+        case GET_USERS_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
+        case SET_USERS_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
+
         default: return state
     }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST }) // можно не писать return
+export const addPostActionCreator = (postText) => ({ type: ADD_POST, postText }) // можно не писать return
 
-export const updatePostActionCreator = (text) => {
-    return {
-        type: UPDATE_POST,
-        newText: text
-    }
-}
 
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+export const getUsersStatus = (status) => ({ type: GET_USERS_STATUS, status })
+export const setUsersStatus = (status) => ({ type: SET_USERS_STATUS, status })
+
+
+export const setUsersTC = (userId) => (dispatch) => {
+    profileAPI.setUsersProfile(userId).then(response => {
+        dispatch(setUserProfile(response));
+    });
+}
+
+export const getUsersStatusTC = (userId) => (dispatch) => {
+    profileAPI.getUsersStatus(userId).then(response => {
+        dispatch(getUsersStatus(response))
+    })
+}
+
+export const setUsersStatusTC = (status) => (dispatch) => {
+    profileAPI.setUsersStatus(status).then(response => {
+        if (response.resultCode === 0) {
+            dispatch(setUsersStatus(status))
+        }
+    })
+}
 export default profileReducer;

@@ -1,5 +1,4 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
-const CHANGE_MESSAGE = "CHANGE-MESSAGE"
 
 let initialState = {
     dataUserInfo: [
@@ -13,8 +12,7 @@ let initialState = {
         { id: 1, text: 'Hello' },
         { id: 2, text: 'How old are you?' },
         { id: 3, text: 'im 21' },
-    ],
-    messageValue: '',
+    ]
 }
 
 
@@ -23,14 +21,7 @@ const messagesReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             return {
                 ...state,
-                dataMessage: [...state.dataMessage, { id: state.dataMessage.length + 1, text: state.messageValue }],
-                messageValue: ''
-            }
-
-        case CHANGE_MESSAGE:
-            return {
-                ...state,
-                messageValue: action.newMessage
+                dataMessage: [...state.dataMessage, { id: state.dataMessage.length + 1, text: action.completeMessage }],
             }
 
         default: return state;
@@ -38,13 +29,6 @@ const messagesReducer = (state = initialState, action) => {
 }
 
 
-export const addMessageActionCreator = () => ({ type: ADD_MESSAGE })
-
-export const updateMessageActionCreator = (message) => {
-    return {
-        type: CHANGE_MESSAGE,
-        newMessage: message,
-    }
-}
+export const addMessageActionCreator = (completeMessage) => ({ type: ADD_MESSAGE, completeMessage })
 
 export default messagesReducer;

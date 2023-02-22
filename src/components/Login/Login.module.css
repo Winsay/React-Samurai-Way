@@ -1,0 +1,198 @@
+.loginWrapp {
+    margin: 0 auto;
+    max-width: 20vw;
+    max-height: 20vh;
+    font-size: 25px;
+}
+
+label {
+    color: rgb(61, 61, 61);
+}
+
+.loginWrapp h1 {
+    margin-bottom: 40px;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: normal;
+    color: rgb(100, 100, 100);
+}
+
+.loginInput {
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginInput input {
+    box-sizing: border-box;
+    height: 40px;
+    padding: 5px 8px;
+    font-size: 16px;
+    font-weight: normal;
+    background-color: rgb(226, 224, 224);
+    border: 0;
+}
+
+.loginInput__error input {
+    border: 1px solid #D02938;
+}
+
+:focus::-webkit-input-placeholder {
+    color: transparent
+}
+
+:focus::-moz-placeholder {
+    color: transparent
+}
+
+:focus:-moz-placeholder {
+    color: transparent
+}
+
+:focus:-ms-input-placeholder {
+    color: transparent
+}
+
+input::-webkit-input-placeholder {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+input::-moz-placeholder {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+input:-moz-placeholder {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+input:-ms-input-placeholder {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+input:focus::-webkit-input-placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+input:focus::-moz-placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+input:focus:-moz-placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+input:focus:-ms-input-placeholder {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.loginInput input:focus {
+    outline: none;
+    border: 2px solid rgb(167, 167, 167);
+}
+
+.loginInput__error input:focus {
+    border: 1px solid #D02938;
+}
+
+.loginInput label {
+    margin-bottom: 5px;
+}
+
+.errorMessage {
+    margin-top: 5px;
+    min-height: 20px;
+}
+
+.errorMessage p {
+    padding-left: 25px;
+    color: #D02938;
+    font-size: 12px;
+    position: relative;
+}
+
+.errorMessage p::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 16px;
+    background-image: url('../../../public/img/warning.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.submitWrapp {
+    display: flex;
+    flex-direction: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.loginCheck {
+    font-size: 14px;
+}
+
+.loginCheck label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.loginCheck label input {
+    width: 18px;
+    height: 18px;
+    display: none;
+    /* background-color: #32a33d; */
+}
+
+.loginCheck label span {
+    height: 10px;
+    width: 10px;
+    border: 1px solid gray;
+    position: relative;
+    background-color: #FFF;
+    border-radius: 2px;
+    padding: 3px;
+}
+
+[type=checkbox]:checked+span:before {
+    content: '\2714';
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 2.9px;
+    font-size: 12.5px;
+    background-color: #32a33d;
+    color: #FFF;
+}
+
+.loginSubmit {
+    display: inline-block;
+}
+
+.loginSubmit input {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+    padding: 10px 20px;
+    background-color: #32a33d;
+    border: 0;
+    cursor: pointer;
+}
+
+.loginSubmit input:disabled {
+    cursor: default;
+    color: #fff;
+    background-color: rgb(100, 100, 100);
+}

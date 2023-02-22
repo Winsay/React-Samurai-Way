@@ -1,10 +1,11 @@
 import './App.css';
-import ProfileContainer from './components/Main/UserInfo/ProfileContainer';
+import ProfileContainer from './components/Main/ProfileContainer';
 import Nav from './components/Nav/Nav';
 import { Route, Routes } from 'react-router-dom';
 import MessagesContainer from './components/Messages/MessagesContainer';
 import UsersContainer from './components/Users/UsersContainer'
 import HeaderContainer from './components/Header/HeaderContainer';
+import LoginPage from './components/Login/Login';
 
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
               } />
             <Route path='/users'
               element={<UsersContainer />} />
+            <Route path='/login'
+              element={<LoginPage />} />
           </Routes>
         </div>
       </div>

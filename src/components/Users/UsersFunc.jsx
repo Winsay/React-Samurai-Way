@@ -4,7 +4,7 @@ import style from "./Users.module.css"
 import Preloader from "../common/preloader/Preloader";
 
 
-export default function UsersFunc({ props, onChangePage, onShowMore, }) {
+export default function UsersFunc({ props, onChangePage, onShowMore, onChangeFollow }) {
     const UserItem = props.userInfo.map((item, index) => (<User
         key={index}
         id={item.id}
@@ -13,6 +13,8 @@ export default function UsersFunc({ props, onChangePage, onShowMore, }) {
         // location={item.location}
         // status={item.status}
         followChanged={props.followChanged}
+        onChangeFollow={onChangeFollow}
+        followingInProgress={props.followingInProgress}
         photo={item.photos.small} />))
 
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);

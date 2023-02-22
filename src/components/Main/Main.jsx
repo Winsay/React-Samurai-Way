@@ -9,7 +9,7 @@ export default function Profile(props) {
         <div>
             <img className={style.anime} src="/img/anime.jpg" alt="anime" />
             <div className={style.mainInfo}>
-                <UserInfo profile={props.profile} />
+                <UserInfo profile={props.profile} status={props.status} onSetUsersStatus={props.onSetUsersStatus} />
             </div>
             <MyPostsContainer profile={props.profile} />
         </div>
