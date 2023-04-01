@@ -118,6 +118,20 @@ input:focus:-ms-input-placeholder {
     position: relative;
 }
 
+
+form>.errorMessage p {
+    outline: 2px solid #D02938;
+    font-size: 20px;
+    padding-left: 30px;
+}
+
+form>.errorMessage p::before {
+    top: 5px;
+    left: 5px;
+    height: 18px;
+    width: 20px;
+}
+
 .errorMessage p::before {
     position: absolute;
     content: '';
@@ -195,4 +209,25 @@ input:focus:-ms-input-placeholder {
     cursor: default;
     color: #fff;
     background-color: rgb(100, 100, 100);
+}
+
+.testData {
+    position: absolute;
+    top: 150px;
+    right: 100px;
+    font-size: 18px;
+}
+
+.testData h3 {
+    font-weight: 500;
+    color: rgb(100, 100, 100);
+}
+
+.testData p {
+    margin-bottom: 10px;
+}
+
+.testData>p>span {
+    color: #c72020;
+    font-size: 24px;
 }

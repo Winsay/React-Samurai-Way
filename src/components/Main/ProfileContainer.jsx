@@ -1,7 +1,7 @@
 import axios from "axios";
 import { connect } from "react-redux";
 import { useParams, Navigate } from 'react-router-dom'
-import React from "react";
+import React, { useEffect } from "react";
 import Profile from "./Main";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { setUsersTC, getUsersStatusTC, setUsersStatusTC } from "../../redux/profile-reducer";
@@ -14,11 +14,24 @@ class ProfileContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if (!userId) {
-            userId = this.props.authProfileId
+        if (userId) {
+            this.props.getUsersStatusTC(userId)
+            this.props.setUsersTC(userId)
+        } else {
+            userId = this.props.authProfileId;
+            if (userId) {
+                this.props.getUsersStatusTC(userId)
+                this.props.setUsersTC(userId)
+            }
         }
-        this.props.getUsersStatusTC(userId)
-        this.props.setUsersTC(userId)
+        // if (!userId) {
+        //     debugger;
+        //     this.props.getUsersStatusTC(this.props.authProfileId)
+        //     this.props.setUsersTC(this.props.authProfileId)
+        // } else {
+        //     this.props.getUsersStatusTC(userId)
+        //     this.props.setUsersTC(userId)
+        // }
     }
 
     onSetUsersStatus = (status) => {
@@ -38,6 +51,7 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
+        if (!this.props.authProfileId && !this.props.match.params.userId) return <Navigate to={'/login'} />
         return <Profile {...this.props} onSetUsersStatus={this.onSetUsersStatus} />
     }
 }
@@ -55,6 +69,8 @@ let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     authProfileId: state.auth.userId,
     status: state.profilePage.status,
+    isAuth: state.auth.isAuth,
+    initialized: state.app.initialized
 })
 
 function withRouter(ProfCont) {
@@ -63,6 +79,7 @@ function withRouter(ProfCont) {
         return <ProfCont {...props} match={match} />
     }
 }
+
 
 // вот как выглядела бы та же запись, если бы не существовало функции compose.
 
@@ -75,5 +92,5 @@ function withRouter(ProfCont) {
 export default compose(
     connect(mapStateToProps, { setUsersTC, getUsersStatusTC, setUsersStatusTC }),
     withRouter,
-    withAuthRedirect,
+    // withAuthRedirect,
 )(ProfileContainer)

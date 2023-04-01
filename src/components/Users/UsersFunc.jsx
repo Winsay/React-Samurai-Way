@@ -4,8 +4,9 @@ import style from "./Users.module.css"
 import Preloader from "../common/preloader/Preloader";
 
 
+
 export default function UsersFunc({ props, onChangePage, onShowMore, onChangeFollow }) {
-    const UserItem = props.userInfo.map((item, index) => (<User
+    const UserItem = props.usersInfo.map((item, index) => (<User
         key={index}
         id={item.id}
         follow={item.followed}

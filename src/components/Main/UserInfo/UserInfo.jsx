@@ -1,7 +1,7 @@
 import React from "react";
 import style from './UserInfo.module.css'
 import Preloader from "../../common/preloader/Preloader";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusHook from "./ProfileStatusHook";
 
 
 
@@ -17,7 +17,7 @@ export default function UserInfo(props) {
             <div className={style.infoText}>
                 <div className={style.profileNameStatus}>
                     <h3 className={style.infoName}>{props.profile.fullName}</h3>
-                    <ProfileStatus status={props.status} onSetUsersStatus={props.onSetUsersStatus} />
+                    <ProfileStatusHook authProfileId={props.authProfileId} profile={props.profile} status={props.status} onSetUsersStatus={props.onSetUsersStatus} />
                 </div>
                 <div className={style.profileInfo}>
                     <h4 className={style.infoBirth}>Date of Birth: 31 august</h4>

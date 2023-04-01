@@ -7,9 +7,12 @@
     justify-content: space-between;
 }
 
-.header img {
+.header .headerLogo {
     max-width: 70px;
     max-height: 70px;
+    display: block;
+    margin-left: 10px;
+    border-radius: 20px;
 }
 
 .loginBlock {
@@ -40,6 +43,7 @@
 
 
 .loginItem {
+    color: #fff;
     border-radius: 10px;
     padding: 10px;
     background-color: rgb(33, 111, 17);
@@ -48,4 +52,16 @@
 
 .loginItem:hover {
     background-color: rgb(34, 121, 17);
+}
+
+.logoutBtn {
+    border: 0;
+    background-color: #3300eb;
+    font-weight: 500;
+    color: #ffffff;
+    transition: background-color .3s ease-in-out;
+}
+
+.logoutBtn:hover {
+    background-color: #2501a8;
 }

@@ -1,18 +1,18 @@
 import React from "react";
 import Header from "./Header";
 import axios from "axios";
+import { redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { setUserDataTC } from "../../redux/auth-reducer";
+import { logoutUserTC } from "../../redux/auth-reducer";
 
 
 class HeaderContainer extends React.Component {
 
-    componentDidMount() {
-        this.props.setUserDataTC();
+    makeLogout = () => {
+        this.props.logoutUserTC();
     }
-
     render() {
-        return <Header {...this.props} />
+        return <Header {...this.props} makeLogout={this.makeLogout} />
     }
 }
 
@@ -22,5 +22,5 @@ let mapStateToProps = (state) => ({
     authProfile: state.auth.authProfile
 })
 
-export default connect(mapStateToProps, { setUserDataTC })(HeaderContainer)
+export default connect(mapStateToProps, { logoutUserTC })(HeaderContainer)
 

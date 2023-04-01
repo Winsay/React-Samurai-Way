@@ -7,6 +7,16 @@ import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { Navigate } from "react-router-dom";
 import { usersAPI } from "../../api/api";
 import { compose } from "redux";
+import {
+    // getUserInfoSuper,
+    getUsersInfo,
+    getPageSize,
+    getTotalUsersCount,
+    getCurentPage,
+    getIsFetching,
+    getFollowingInProgress
+} from "../../redux/users-selectors";
+
 
 class UsersAPIComponent extends React.Component {
     componentDidMount() {
@@ -106,14 +116,32 @@ class UsersAPIComponent extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        userInfo: state.usersPage.userInfo,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        curentPage: state.usersPage.curentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
+        // usersInfo: getUserInfoSuper(state), // при использовании библиотеки reselect мы можем создать сложный селектор который будет обновляться только при изменении входящих в него значений
+        usersInfo: getUsersInfo(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        curentPage: getCurentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
+
+        // usersInfo: state.usersPage.userInfo,
+        // pageSize: state.usersPage.pageSize,
+        // totalUsersCount: state.usersPage.totalUsersCount,
+        // curentPage: state.usersPage.curentPage,
+        // isFetching: state.usersPage.isFetching,
+        // followingInProgress: state.usersPage.followingInProgress,
     }
 }
+// let mapStateToProps = (state) => {
+//     return {
+//         userInfo: state.usersPage.userInfo,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         curentPage: state.usersPage.curentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress,
+//     }
+// }
 
 // вариант развернутого кода в котором мы сами создаем функцию которая умеет диспатчить экшены, но редакс нам позволяет упростить код, просто внося необходимые функции в конект при
 // помощи деструктуризации, а редакс после этого уже самостоятельно создаст экшн криейтор и задиспатчит
@@ -145,7 +173,7 @@ let mapStateToProps = (state) => {
 
 const UsersContainer = compose(
     connect(mapStateToProps, { getUsersThunkCreator, changePageTC, showMoreTC, changeFollowTC, }),
-    withAuthRedirect
+    // withAuthRedirect
 )(UsersAPIComponent)
 
 export default UsersContainer;

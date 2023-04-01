@@ -9,7 +9,7 @@ export default function Nav(props) {
         <nav className={style.nav}>
             <ul className={style.navList}>
                 <li className={style.navItem}>
-                    <NavLink to='/profile/' className={({ isActive }) => (isActive ? style.active : style.navLink)} >
+                    <NavLink to={`/profile`} className={({ isActive }) => (isActive ? style.active : style.navLink)} >
                         Profile
                     </NavLink>
                 </li>

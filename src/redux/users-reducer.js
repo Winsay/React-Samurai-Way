@@ -156,14 +156,14 @@ export const changeFollowTC = (id) => {
         dispatch(toggleInFollowingProgress(true, id));
         usersAPI.followChange.followedCheck(id).then(response => {
             let followStatus = response;
-            if (followStatus === false) {
+            if (!followStatus) {
                 usersAPI.followChange.following(id).then(response => {
                     if (response.resultCode === 0) {
                         dispatch(followChanged(id, followStatus = true));
                     }
                     dispatch(toggleInFollowingProgress(false, id))
                 })
-            } else if (followStatus === true) {
+            } else if (followStatus) {
                 usersAPI.followChange.unfollowing(id).then(response => {
                     if (response.resultCode === 0) {
                         dispatch(toggleInFollowingProgress(false, id))

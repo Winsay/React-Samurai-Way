@@ -10,4 +10,21 @@
 
 .mainWrapper {
   grid-area: main;
+  position: relative;
+}
+
+.PreloaderWrapp {
+  position: relative;
+  background-color: #f6f6f6;
+  height: 100vh;
+}
+
+.PreloaderItem {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
 }

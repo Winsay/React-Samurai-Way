@@ -1,20 +1,21 @@
 import style from "./Login.module.css"
 import React from "react";
+import { Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 
 
-const LoginForm = () => {
+const LoginForm = (props) => {
 
-    const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm({
+    const { register, handleSubmit, formState: { errors, isValid } } = useForm({
         mode: 'all',
         defaultValues: { rememberMe: false }
     });
 
     const onSubmit = (data) => {
-        alert(JSON.stringify(data));
-        reset();
+        props.userLogin(data)
     }
+
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -38,10 +39,6 @@ const LoginForm = () => {
                 <input
                     {...register('password', {
                         required: 'Поле обязательно к заполнению',
-                        minLength: {
-                            value: 8,
-                            message: 'Минимальная длина пароля 8 символов'
-                        }
                     })}
                     type={'password'}
                     placeholder="Password" />
@@ -65,16 +62,28 @@ const LoginForm = () => {
                     <input type="submit" value={'Login'} disabled={!isValid} />
                 </div>
             </div>
+            <div className={style.errorMessage}>
+                {props.errorMessage ? <p>{props.errorMessage}</p> : ''}
+            </div>
         </form>
     )
 }
 
 
 export default function Login(props) {
+    debugger;
+    if (props.isAuth) {
+        return <Navigate to={'/profile'} />
+    }
     return (
         <div className={style.loginWrapp}>
             <h1>Login</h1>
-            <LoginForm />
+            <LoginForm {...props} />
+            <div className={style.testData}>
+                <h3>Тестовые данные.</h3>
+                <p>Email: <span>free@samuraijs.com</span></p>
+                <p>Password: <span>free</span></p>
+            </div>
         </div>
     )
 }

@@ -60,5 +60,13 @@ export const authAPI = {
     getProfile(id) {
         return instance.get(`profile/${id}`)
             .then(response => response.data)
+    },
+    loginingProces(data) {
+        return instance.post('auth/login', data)
+            .then(response => response.data)
+    },
+    logoutProces() {
+        return instance.delete('auth/login')
+            .then(response => response.data)
     }
 }
