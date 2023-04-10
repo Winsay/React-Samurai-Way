@@ -12,7 +12,7 @@ export default function UserInfo(props) {
     return (
         <>
             <div className={style.infoLogo}>
-                <img className={style.infoPhoto} src={!props.profile.photos.large ? '/img/avatar.png' : props.profile.photos.large} alt="profile" />
+                <img className={style.infoPhoto} src={!props.profile.photos.large ? 'img/avatar.png' : props.profile.photos.large} alt="profile" />
             </div>
             <div className={style.infoText}>
                 <div className={style.profileNameStatus}>

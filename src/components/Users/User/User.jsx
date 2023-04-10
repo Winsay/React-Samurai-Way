@@ -52,7 +52,7 @@ export default function User(props) {
         <div className={style.user}>
             <div className={style.userLeft}>
                 <NavLink to={`/profile/${props.id}`}>
-                    <img src={props.photo ? props.photo : '/img/avatar.png'} alt="face" className={style.userPic} />
+                    <img src={props.photo ? props.photo : 'img/avatar.png'} alt="face" className={style.userPic} />
                 </NavLink>
                 <button disabled={props.followingInProgress.some(id => id === props.id)} onClick={changeFollow} className={props.follow ? style.userFollow : style.userUnfollow} >{props.followingInProgress.some(id => id === props.id) ? 'Wait....' : `${props.follow ? 'Followed' : 'Unfollowed'}`}</button>
             </div>

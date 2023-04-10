@@ -1,7 +1,7 @@
 import './App.css';
 import React, { Suspense, lazy } from 'react';
 import ProfileContainer from './components/Main/ProfileContainer';
-import { Route, Routes, useParams, HashRouter as Router } from 'react-router-dom';
+import { Route, Routes, useParams, BrowserRouter as Router } from 'react-router-dom';
 // import MessagesContainer from './components/Messages/MessagesContainer';
 // import UsersContainer from './components/Users/UsersContainer'
 import HeaderContainer from './components/Header/HeaderContainer';

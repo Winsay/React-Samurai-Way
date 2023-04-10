@@ -12,7 +12,7 @@ export default function MyPost(props) {
 
     return (
         <div className={style.posts}>
-            <img src={!props.profile.photos.small ? "/img/avatar.png" : props.profile.photos.small} alt="prof" className={style.profilePic} />
+            <img src={!props.profile.photos.small ? "img/avatar.png" : props.profile.photos.small} alt="prof" className={style.profilePic} />
             <p className={style.postsText}>{props.postText}</p>
         </div>
     )

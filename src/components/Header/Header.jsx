@@ -21,13 +21,13 @@ export default function Header(props) {
     return (
         <header className={style.header}>
             <NavLink to={'/profile'}>
-                <img className={style.headerLogo} src="/img/logo.png" alt="Logo" />
+                <img className={style.headerLogo} src="img/logo.png" alt="Logo" />
             </NavLink>
             <div className={style.loginBlock}>
                 {props.isAuth ?
                     <>
                         <NavLink className={style.UserLogined} to={`/profile/${props.authProfile.userId}`}>
-                            <img src={!props.authProfile.photos.small ? '/img/avatar.png' : props.authProfile.photos.small} alt="User" className="userImg" />
+                            <img src={!props.authProfile.photos.small ? 'img/avatar.png' : props.authProfile.photos.small} alt="User" className="userImg" />
                             {props.login}
                         </NavLink>
                         {/* <NavLink to={'/login'}> */}
