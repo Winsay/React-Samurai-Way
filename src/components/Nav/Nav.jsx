@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 
 export default function Nav(props) {
+    const friends = props.friends.map(elem => <Friend key={elem.id} id={elem.id} name={elem.name} photo={elem.photo} />)
     return (
         <nav className={style.nav}>
             <ul className={style.navList}>
@@ -42,7 +43,7 @@ export default function Nav(props) {
             </ul>
             <h3 className={style.friendsTitle}>Friends</h3>
             <div className={style.friends}>
-                {/* {props.friendData.map((item, index) => <Friend imgUrl={item.img} name={item.name} key={index} id={item.id} />)} */}
+                {friends}
             </div>
         </nav>
     )

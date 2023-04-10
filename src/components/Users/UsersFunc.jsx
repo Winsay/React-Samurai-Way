@@ -20,28 +20,54 @@ export default function UsersFunc({ props, onChangePage, onShowMore, onChangeFol
 
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
+
+    const goToThePage = () => {
+        let page = null;
+        if (inputValue.current.value > pagesCount) {
+            page = pagesCount
+        } else if (inputValue.current.value <= 0) {
+            page = 1
+        } else {
+            page = inputValue.current.value
+        }
+        onChangePage(Number(page))
+    }
+    const prevPagesButton = () => {
+        let page = null;
+        if (curPage < 6) {
+            page = curPage - 1
+        } else {
+            page = slicedPages[0] - 5
+        }
+        onChangePage(page)
+    }
+
+    let inputValue = React.createRef();
+    // console.log(inputValue.current.value)
+
     const pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
     let slicedPages;
     let curPage = props.curentPage;
-    if (curPage - 3 < 0) {
-        slicedPages = pages.slice(0, 5)
-    } else {
-        slicedPages = pages.slice(curPage - 3, curPage + 2)
-    }
-
+    slicedPages = pages.slice(curPage - 1, curPage + 4)
     let Prel = [...Array(4)]
-    // let curP = this.props.curentPage;
-    // let curPF = ((curP - 3) < 0) ? 0 : curP - 3;
-    // let curPL = curP + 3;
-    // let slicedPages = pages.slice(curPF, curPL)
-
     return (
         <>
             <h3 className={style.title}>Users</h3>
-            {slicedPages.map((item, index) => <span onClick={(e) => { onChangePage(item) }} key={index} className={props.curentPage === item ? style.selectedPage : ''}>{item}</span>)}
+            <div className={style.pagesPaginator}>
+                <div className={style.paginatorLeft}>
+                    <button disabled={curPage === 1} onClick={prevPagesButton} className={style.prevPages}>Prev</button>
+                    {slicedPages.map((item, index) => <span onClick={(e) => { onChangePage(item) }} key={index} className={props.curentPage === item ? style.selectedPage : ''}>{item}</span>)}
+                    <button disabled={curPage + 5 > pagesCount} className={style.nextPages} onClick={(e) => { onChangePage(slicedPages[slicedPages.length - 1] + 1) }}>Next</button>
+                </div>
+                <div className={style.paginatorRight}>
+                    <input ref={inputValue} type="number" placeholder="page..." />
+                    <button onClick={goToThePage}>Go</button>
+                    <span>maxPage = {pagesCount}</span>
+                </div>
+            </div>
             {props.isFetching
                 ?
                 Prel.map((item, index) => <Preloader key={index} />)
@@ -51,7 +77,7 @@ export default function UsersFunc({ props, onChangePage, onShowMore, onChangeFol
                         <div className={style.userWrappwer}>
                             {UserItem}
                         </div>
-                        <button onClick={(e) => { onShowMore() }} className={style.moreUsers}>Show More</button>
+                        <button onClick={(e) => { onShowMore(pagesCount) }} className={style.moreUsers}>Show More</button>
                     </div>
                 </>
             }

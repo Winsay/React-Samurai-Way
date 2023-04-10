@@ -1,5 +1,18 @@
 .friend {
-    text-align: center;
+    flex: 0 0 33%;
+    text-decoration: none;
+}
+
+.friend:hover .friendName {
+    color: rgb(0, 0, 0);
+    background-color: rgb(207, 205, 205);
+}
+
+.friend div {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-self: center;
+    align-items: center;
 }
 
 .friendImg {
@@ -10,9 +23,14 @@
 }
 
 .friendName {
+    padding: 2px;
+    border-radius: 5px;
     font-weight: 400;
     font-size: 18px;
     color: #fff;
     margin: 0;
     font-style: italic;
+    margin-top: 10px;
+    transition: all 0.5s ease;
+    white-space: nowrap
 }

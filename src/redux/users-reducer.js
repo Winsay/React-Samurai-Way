@@ -1,13 +1,13 @@
 import { usersAPI } from "../api/api";
 
 
-const CHANGE_FOLLOW = 'CHANGE-FOLLOW';
-const SET_USERS = 'SET-USERS';
-const SET_PAGE = 'SET-PAGE';
-const SET_USERS_COUNT = 'SET-USERS-COUNT';
-const SHOW_MORE = 'SHOW-MORE';
-const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
-const TOGGLE_IN_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
+const CHANGE_FOLLOW = 'social-network/users/CHANGE-FOLLOW';
+const SET_USERS = 'social-network/users/SET-USERS';
+const SET_PAGE = 'social-network/users/SET-PAGE';
+const SET_USERS_COUNT = 'social-network/users/SET-USERS-COUNT';
+const SHOW_MORE = 'social-network/users/SHOW-MORE';
+const TOGGLE_IS_FETCHING = 'social-network/users/TOGGLE-IS-FETCHING';
+const TOGGLE_IN_FOLLOWING_PROGRESS = 'social-network/users/TOGGLE-IS-FOLLOWING-PROGRESS';
 
 let initialState = {
     userInfo: [
@@ -120,58 +120,53 @@ export const toggleInFollowingProgress = (isFollowingProgress, userId) => {
 
 
 export const getUsersThunkCreator = (curentPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsFetching(true));
-        usersAPI.getUsers(curentPage, pageSize).then(response => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setUsers(response.items));
-            dispatch(setTotalUsersCount(response.totalCount));
-        });
+        let response = await usersAPI.getUsers(curentPage, pageSize)
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(response.items));
+        dispatch(setTotalUsersCount(response.totalCount));
+        return response;
     }
 }
 
 export const changePageTC = (newPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleIsFetching(true));
         dispatch(setPage(newPage));
-        usersAPI.getUsers(newPage, pageSize).then(response => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setUsers(response.items))
-        });
+        let response = await usersAPI.getUsers(newPage, pageSize);
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(response.items))
     }
 }
 export const showMoreTC = (curentPage, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(showMore());
         dispatch(toggleIsFetching(true));
-        usersAPI.getUsers(curentPage, pageSize + 4).then(response => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setUsers(response.items))
-        });
+        let response = await usersAPI.getUsers(curentPage, pageSize + 4)
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(response.items))
     }
 }
 
 export const changeFollowTC = (id) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleInFollowingProgress(true, id));
-        usersAPI.followChange.followedCheck(id).then(response => {
-            let followStatus = response;
-            if (!followStatus) {
-                usersAPI.followChange.following(id).then(response => {
-                    if (response.resultCode === 0) {
-                        dispatch(followChanged(id, followStatus = true));
-                    }
-                    dispatch(toggleInFollowingProgress(false, id))
-                })
-            } else if (followStatus) {
-                usersAPI.followChange.unfollowing(id).then(response => {
-                    if (response.resultCode === 0) {
-                        dispatch(toggleInFollowingProgress(false, id))
-                        dispatch(followChanged(id, followStatus = false));
-                    }
-                })
+        let response = await usersAPI.followChange.followedCheck(id)
+        let followStatus = response;
+        if (!followStatus) {
+            let response = await usersAPI.followChange.following(id)
+            if (response.resultCode === 0) {
+                dispatch(followChanged(id, followStatus = true));
             }
-        })
+            dispatch(toggleInFollowingProgress(false, id))
+        } else if (followStatus) {
+            let response = await usersAPI.followChange.unfollowing(id)
+            if (response.resultCode === 0) {
+                dispatch(toggleInFollowingProgress(false, id))
+            }
+            dispatch(followChanged(id, followStatus = false));
+        }
 
     }
 }

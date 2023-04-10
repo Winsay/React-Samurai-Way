@@ -42,8 +42,14 @@ class UsersAPIComponent extends React.Component {
 
     }
 
-    onShowMore = () => {
-        this.props.showMoreTC(this.props.curentPage, this.props.pageSize);
+    onShowMore = async (pagesCount) => {
+        if (pagesCount / 2 < this.props.curentPage) {
+            await this.props.changePageTC(Math.ceil(this.props.curentPage / 2), this.props.pageSize);
+            this.props.showMoreTC(Math.ceil(this.props.curentPage), this.props.pageSize);
+        } else {
+            this.props.showMoreTC(this.props.curentPage, this.props.pageSize);
+        }
+
 
         // this.props.showMore();
         // this.props.toggleIsFetching(true);

@@ -1,6 +1,6 @@
-import { authAPI } from "../api/api"
-const SET_USER_DATA = "SET-USER-DATA";
-const GET_AUTH_ERROR = "GET-AUTH-ERROR";
+import { authAPI } from "../api/api";
+const SET_USER_DATA = "social-network/auth/SET-USER-DATA";
+const GET_AUTH_ERROR = "social-network/auth/GET-AUTH-ERROR";
 
 let initialState = {
     userId: null,
@@ -44,34 +44,43 @@ export const getAuthError = (error) => {
     }
 }
 
+// export const setUserDataTC = () => (dispatch) => {
+//     return authAPI.auth().then(response => {
+//         if (response.resultCode === 0) {
+//             let { id, login, email } = response.data;
+//             return authAPI.getProfile(id).then(response => {
+//                 dispatch(setUserData(id, login, email, true, response));
+//             });
+//         }
+//     })
+// }
 
-export const setUserDataTC = () => (dispatch) => {
-    return authAPI.auth().then(response => {
-        if (response.resultCode === 0) {
-            let { id, login, email } = response.data;
-            return authAPI.getProfile(id).then(response => {
-                dispatch(setUserData(id, login, email, true, response));
-            });
-        }
-    })
+
+export const setUserDataTC = () => async (dispatch) => {
+    let firstResponse = await authAPI.auth();
+    if (firstResponse.resultCode === 0) {
+        let { id, login, email } = firstResponse.data;
+        let response = await authAPI.getProfile(id);
+        dispatch(setUserData(id, login, email, true, response));
+        return response;
+    }
+    return firstResponse;
 }
 
-export const loginUserTC = (data) => (dispatch) => {
-    authAPI.loginingProces(data).then(response => {
-        if (response.resultCode === 0) {
-            dispatch(setUserDataTC());
-        } else if (response.resultCode !== 0) {
-            dispatch(getAuthError(response.messages[0]))
-        }
-    })
+export const loginUserTC = (data) => async (dispatch) => {
+    let response = await authAPI.loginingProces(data)
+    if (response.resultCode === 0) {
+        dispatch(setUserDataTC());
+    } else if (response.resultCode !== 0) {
+        dispatch(getAuthError(response.messages[0]))
+    }
 }
 
-export const logoutUserTC = () => (dispatch) => {
-    authAPI.logoutProces().then(response => {
-        if (response.resultCode === 0) {
-            dispatch(setUserData(null, null, null, false, null))
-        }
-    })
+export const logoutUserTC = () => async (dispatch) => {
+    let response = await authAPI.logoutProces()
+    if (response.resultCode === 0) {
+        dispatch(setUserData(null, null, null, false, null))
+    }
 }
 
 

@@ -1,8 +1,9 @@
 import { usersAPI } from "../api/api";
 import { setUserDataTC, logoutUserTC } from "./auth-reducer";
+import { getUsersThunkCreator } from "./users-reducer";
 
 
-const SET_INITIALIZED = "SET-INITIALIZED"
+const SET_INITIALIZED = "social-network/app/SET-INITIALIZED"
 
 
 
@@ -32,9 +33,9 @@ const setInitializedAC = () => {
 
 export const initializationAppTC = () => (dispatch) => {
     let promise = dispatch(setUserDataTC());
+    let promiseTwo = dispatch(getUsersThunkCreator())
     // dispatch(somethingElse())
-    // dispatch(somethingElse())
-    Promise.all([promise]).then(() => {
+    Promise.all([promise, promiseTwo]).then(() => {
         dispatch(setInitializedAC())
     })
 }
