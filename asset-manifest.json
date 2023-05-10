@@ -1,25 +1,27 @@
 {
   "files": {
-    "main.css": "/React-Samurai-Way/static/css/main.cf592ef5.css",
-    "main.js": "/React-Samurai-Way/static/js/main.030939bb.js",
-    "static/css/394.15735bcd.chunk.css": "/React-Samurai-Way/static/css/394.15735bcd.chunk.css",
-    "static/js/394.a7c6905d.chunk.js": "/React-Samurai-Way/static/js/394.a7c6905d.chunk.js",
+    "main.css": "/React-Samurai-Way/static/css/main.c6bc02f2.css",
+    "main.js": "/React-Samurai-Way/static/js/main.f08425a3.js",
+    "static/css/394.45b631cb.chunk.css": "/React-Samurai-Way/static/css/394.45b631cb.chunk.css",
+    "static/js/394.fc9bc526.chunk.js": "/React-Samurai-Way/static/js/394.fc9bc526.chunk.js",
     "static/css/377.a088d083.chunk.css": "/React-Samurai-Way/static/css/377.a088d083.chunk.css",
     "static/js/377.75cc8068.chunk.js": "/React-Samurai-Way/static/js/377.75cc8068.chunk.js",
+    "static/media/anime.jpg": "/React-Samurai-Way/static/media/anime.15094f8008e17498b3c0.jpg",
     "static/media/messages-bg.jpg": "/React-Samurai-Way/static/media/messages-bg.df220d2d9575582bb5e5.jpg",
     "static/media/spinner.gif": "/React-Samurai-Way/static/media/spinner.43c65c2000fd19c48a5e.gif",
+    "static/media/logo.png": "/React-Samurai-Way/static/media/logo.dd7c0b75049ce12bf17c.png",
     "static/media/warning.svg": "/React-Samurai-Way/static/media/warning.0dc82e8ab70d07b1baf6.svg",
     "static/media/send.svg": "/React-Samurai-Way/static/media/send.766bdb8dc7c4a77c83a8.svg",
     "index.html": "/React-Samurai-Way/index.html",
-    "main.cf592ef5.css.map": "/React-Samurai-Way/static/css/main.cf592ef5.css.map",
-    "main.030939bb.js.map": "/React-Samurai-Way/static/js/main.030939bb.js.map",
-    "394.15735bcd.chunk.css.map": "/React-Samurai-Way/static/css/394.15735bcd.chunk.css.map",
-    "394.a7c6905d.chunk.js.map": "/React-Samurai-Way/static/js/394.a7c6905d.chunk.js.map",
+    "main.c6bc02f2.css.map": "/React-Samurai-Way/static/css/main.c6bc02f2.css.map",
+    "main.f08425a3.js.map": "/React-Samurai-Way/static/js/main.f08425a3.js.map",
+    "394.45b631cb.chunk.css.map": "/React-Samurai-Way/static/css/394.45b631cb.chunk.css.map",
+    "394.fc9bc526.chunk.js.map": "/React-Samurai-Way/static/js/394.fc9bc526.chunk.js.map",
     "377.a088d083.chunk.css.map": "/React-Samurai-Way/static/css/377.a088d083.chunk.css.map",
     "377.75cc8068.chunk.js.map": "/React-Samurai-Way/static/js/377.75cc8068.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cf592ef5.css",
-    "static/js/main.030939bb.js"
+    "static/css/main.c6bc02f2.css",
+    "static/js/main.f08425a3.js"
   ]
 }
