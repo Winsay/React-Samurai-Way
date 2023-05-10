@@ -5,6 +5,8 @@ const DELETE_POST = "social-network/profile/DELETE-POST";
 const SET_USER_PROFILE = "social-network/profile/SET-USER-PROFILE";
 const GET_USERS_STATUS = "social-network/profile/GET-USERS-STATUS";
 const SET_USERS_STATUS = "social-network/profile/SET-USERS-STATUS";
+const SET_NEW_PROFILE_PHOTOS = 'social-network/profile/SET-NEW-PROFILE-PHOTOS';
+const AWAIT_RESPONSE_INFO = 'social-network/profile/AWAIT-RESPONSE-INFO'
 
 
 let initialState = {
@@ -16,7 +18,8 @@ let initialState = {
         { id: 5, text: 'Glory to Ukraine' },
     ],
     profile: null,
-    status: ''
+    status: '',
+    awaitResponseInfo: false
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -36,7 +39,7 @@ const profileReducer = (state = initialState, action) => {
         case SET_USER_PROFILE:
             return {
                 ...state,
-                profile: action.profile
+                profile: { ...action.profile }
             }
 
         case GET_USERS_STATUS:
@@ -49,7 +52,16 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status
             }
-
+        case SET_NEW_PROFILE_PHOTOS:
+            return {
+                ...state,
+                profile: { ...state.profile, photos: action.photos },
+            }
+        case AWAIT_RESPONSE_INFO:
+            return {
+                ...state,
+                awaitResponseInfo: action.value
+            }
         default: return state
     }
 }
@@ -61,6 +73,9 @@ export const deletePostActioncreator = (postId) => ({ type: DELETE_POST, postId 
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const getUsersStatus = (status) => ({ type: GET_USERS_STATUS, status })
 export const setUsersStatus = (status) => ({ type: SET_USERS_STATUS, status })
+export const setNewProfilePhoto = (photos) => ({ type: SET_NEW_PROFILE_PHOTOS, photos })
+export const awaitResponseInfoAC = (value) => ({ type: AWAIT_RESPONSE_INFO, value })
+
 
 
 export const setUsersTC = (userId) => async (dispatch) => {
@@ -79,4 +94,22 @@ export const setUsersStatusTC = (status) => async (dispatch) => {
         dispatch(setUsersStatus(status))
     }
 }
+
+export const setNewProfilePhotoTC = (photoFile) => async (dispatch) => {
+    let response = await profileAPI.setNewProfilePhoto(photoFile);
+    if (response.resultCode === 0) {
+        dispatch(setNewProfilePhoto(response.data.photos))
+    }
+}
+
+export const setNewUserInfoTC = (data) => async (dispatch) => {
+    dispatch(awaitResponseInfoAC(true))
+    let response = await profileAPI.setNewUserInfo(data)
+    if (response.resultCode === 0) {
+        dispatch(setUsersTC(data.userId))
+    }
+    dispatch(awaitResponseInfoAC(false))
+}
+
+
 export default profileReducer;

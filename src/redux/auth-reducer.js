@@ -1,14 +1,17 @@
 import { authAPI } from "../api/api";
 const SET_USER_DATA = "social-network/auth/SET-USER-DATA";
 const GET_AUTH_ERROR = "social-network/auth/GET-AUTH-ERROR";
+const SET_NEW_PROFILE_PHOTOS = 'social-network/profile/SET-NEW-PROFILE-PHOTOS';
+const GET_CAPTCHA_URL = "GET-CAPTCHA-URL"
 
 let initialState = {
     userId: null,
     email: null,
     login: null,
-    isAuth: false,//
+    isAuth: false,
     authProfile: null,
-    errorMessage: null
+    errorMessage: null,
+    captchaURL: false,
 }
 
 
@@ -26,21 +29,38 @@ const authReducer = (state = initialState, action) => {
                 errorMessage: action.error
             }
 
+        case SET_NEW_PROFILE_PHOTOS:
+            return {
+                ...state,
+                authProfile: { ...state.authProfile, photos: action.photos }
+            }
+        case GET_CAPTCHA_URL:
+            return {
+                ...state,
+                captchaURL: action.captchaURL,
+            }
         default: return state;
     }
 }
 
 
-export const setUserData = (userId, login, email, isAuth, authProfile) => {
+export const setUserData = (userId, login, email, isAuth, authProfile, errorMessage, captchaURL) => {
     return {
         type: SET_USER_DATA,
-        data: { userId, email, login, isAuth, authProfile }
+        data: { userId, email, login, isAuth, authProfile, errorMessage, captchaURL }
     }
 }
 export const getAuthError = (error) => {
     return {
         type: GET_AUTH_ERROR,
         error
+    }
+}
+
+export const getCaptchaAC = (captchaURL) => {
+    return {
+        type: GET_CAPTCHA_URL,
+        captchaURL,
     }
 }
 
@@ -68,10 +88,16 @@ export const setUserDataTC = () => async (dispatch) => {
 }
 
 export const loginUserTC = (data) => async (dispatch) => {
+    debugger
     let response = await authAPI.loginingProces(data)
     if (response.resultCode === 0) {
         dispatch(setUserDataTC());
+        dispatch(getCaptchaAC(null))
     } else if (response.resultCode !== 0) {
+        if (response.resultCode === 10) {
+            let response = await authAPI.getChaptchaURL()
+            dispatch(getCaptchaAC(response.url))
+        }
         dispatch(getAuthError(response.messages[0]))
     }
 }
@@ -79,7 +105,7 @@ export const loginUserTC = (data) => async (dispatch) => {
 export const logoutUserTC = () => async (dispatch) => {
     let response = await authAPI.logoutProces()
     if (response.resultCode === 0) {
-        dispatch(setUserData(null, null, null, false, null))
+        dispatch(setUserData(null, null, null, false, null, null, false))
     }
 }
 

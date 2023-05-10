@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useRef } from "react";
 import User from "./User/User";
 import style from "./Users.module.css"
 import Preloader from "../common/preloader/Preloader";
 
 
 
-export default function UsersFunc({ props, onChangePage, onShowMore, onChangeFollow }) {
+export default function UsersFunc({ props, onChangePage, onShowMore, onChangeFollow, onUsingSelectors }) {
+    debugger;
     const UserItem = props.usersInfo.map((item, index) => (<User
         key={index}
         id={item.id}
         follow={item.followed}
         name={item.name}
         // location={item.location}
-        // status={item.status}
+        status={item.status}
         followChanged={props.followChanged}
         onChangeFollow={onChangeFollow}
         followingInProgress={props.followingInProgress}
-        photo={item.photos.small} />))
+        photo={item.photos.small}
+        isAuth={props.isAuth}
+    />))
+
 
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
@@ -53,6 +57,16 @@ export default function UsersFunc({ props, onChangePage, onShowMore, onChangeFol
     let curPage = props.curentPage;
     slicedPages = pages.slice(curPage - 1, curPage + 4)
     let Prel = [...Array(4)]
+
+
+    // SELECTOR SEARCH
+    let searchUsersInput = useRef('');
+    let selectorUsersInput = useRef(null)
+
+    const usingSelectors = (searchUsersInput, selectorUsersInput) => {
+        onUsingSelectors(searchUsersInput, selectorUsersInput)
+    }
+
     return (
         <>
             <h3 className={style.title}>Users</h3>
@@ -66,6 +80,15 @@ export default function UsersFunc({ props, onChangePage, onShowMore, onChangeFol
                     <input ref={inputValue} type="number" placeholder="page..." />
                     <button onClick={goToThePage}>Go</button>
                     <span>maxPage = {pagesCount}</span>
+                </div>
+                <div className={style.usersSelector}>
+                    <input placeholder="Name..." ref={searchUsersInput} type="text" />
+                    <select name="isFriends" ref={selectorUsersInput}>
+                        <option value="null">All</option>
+                        <option value="true">Followed</option>
+                        <option value="false">Unfollowed</option>
+                    </select>
+                    <button onClick={() => usingSelectors(searchUsersInput.current.value, selectorUsersInput.current.value)}>Find</button>
                 </div>
             </div>
             {props.isFetching

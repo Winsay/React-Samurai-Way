@@ -22,6 +22,12 @@
 
 
 .formPost textarea {
+    outline: none;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+    font-weight: 400;
+    background-color: #d4d4d4;
     border: 0;
     transition: border-color 1s ease;
 }
@@ -37,9 +43,11 @@
 
 .formPost .errorMessage {
     min-height: 20px;
+    margin: 10px 0;
 }
 
 .formPost .errorMessage p {
+    margin: 0;
     padding-left: 25px;
     color: #D02938;
     font-size: 12px;
@@ -53,7 +61,7 @@
     top: 0;
     width: 18px;
     height: 16px;
-    background-image: url('../../../../public/img/warning.svg');
+    background-image: url('../../../assets/img/warning.svg');
     background-repeat: no-repeat;
     background-size: cover;
 }

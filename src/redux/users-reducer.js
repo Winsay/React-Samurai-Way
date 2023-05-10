@@ -1,5 +1,5 @@
 import { usersAPI } from "../api/api";
-
+import { setFriendDataTC } from "./friend-reducer";
 
 const CHANGE_FOLLOW = 'social-network/users/CHANGE-FOLLOW';
 const SET_USERS = 'social-network/users/SET-USERS';
@@ -8,6 +8,7 @@ const SET_USERS_COUNT = 'social-network/users/SET-USERS-COUNT';
 const SHOW_MORE = 'social-network/users/SHOW-MORE';
 const TOGGLE_IS_FETCHING = 'social-network/users/TOGGLE-IS-FETCHING';
 const TOGGLE_IN_FOLLOWING_PROGRESS = 'social-network/users/TOGGLE-IS-FOLLOWING-PROGRESS';
+const SET_SELECTORS = 'social-network/users/SET-SELECTORS'
 
 let initialState = {
     userInfo: [
@@ -19,6 +20,8 @@ let initialState = {
     pageSize: 4,
     totalUsersCount: 0,
     curentPage: 1,
+    isFollowed: null,
+    searchInputValue: null,
     isFetching: true,
     followingInProgress: []
 }
@@ -55,6 +58,13 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pageSize: state.pageSize + 4
+            }
+        case SET_SELECTORS:
+            return {
+                ...state,
+                curentPage: 1,
+                searchInputValue: action.searchInputValue,
+                isFollowed: action.isFollowed
             }
         case TOGGLE_IS_FETCHING:
             return {
@@ -103,6 +113,15 @@ export const showMore = () => {
         type: SHOW_MORE,
     }
 }
+
+export const setSelectors = (searchInputValue, isFollowed) => {
+    return {
+        type: SET_SELECTORS,
+        searchInputValue,
+        isFollowed
+    }
+}
+
 export const toggleIsFetching = (fetching) => {
     return {
         type: TOGGLE_IS_FETCHING,
@@ -130,26 +149,35 @@ export const getUsersThunkCreator = (curentPage, pageSize) => {
     }
 }
 
-export const changePageTC = (newPage, pageSize) => {
+export const changePageTC = (newPage, pageSize, isFollowed, searchInputValue) => {
     return async (dispatch) => {
         dispatch(toggleIsFetching(true));
         dispatch(setPage(newPage));
-        let response = await usersAPI.getUsers(newPage, pageSize);
+        let response = await usersAPI.getUsers(newPage, pageSize, isFollowed, searchInputValue);
         dispatch(toggleIsFetching(false));
         dispatch(setUsers(response.items))
     }
 }
-export const showMoreTC = (curentPage, pageSize) => {
+export const showMoreTC = (curentPage, pageSize, isFollowed, searchInputValue) => {
     return async (dispatch) => {
         dispatch(showMore());
         dispatch(toggleIsFetching(true));
-        let response = await usersAPI.getUsers(curentPage, pageSize + 4)
+        let response = await usersAPI.getUsers(curentPage, pageSize + 4, isFollowed, searchInputValue)
         dispatch(toggleIsFetching(false));
         dispatch(setUsers(response.items))
     }
 }
 
-export const changeFollowTC = (id) => {
+export const useSelectorsTC = (searchInputValue, isFollowed, pageSize) => async (dispatch) => {
+    dispatch(setSelectors(searchInputValue, isFollowed));
+    dispatch(toggleIsFetching(true));
+    let response = await usersAPI.getUsers(1, pageSize, isFollowed, searchInputValue);
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(response.items))
+    dispatch(setTotalUsersCount(response.totalCount))
+}
+
+export const changeFollowTC = (id, isFollowed, pageSize) => {
     return async (dispatch) => {
         dispatch(toggleInFollowingProgress(true, id));
         let response = await usersAPI.followChange.followedCheck(id)
@@ -158,12 +186,20 @@ export const changeFollowTC = (id) => {
             let response = await usersAPI.followChange.following(id)
             if (response.resultCode === 0) {
                 dispatch(followChanged(id, followStatus = true));
+                dispatch(setFriendDataTC(true));
+                if (isFollowed === 'false') {
+                    dispatch(useSelectorsTC(null, isFollowed, pageSize))
+                }
             }
             dispatch(toggleInFollowingProgress(false, id))
         } else if (followStatus) {
             let response = await usersAPI.followChange.unfollowing(id)
             if (response.resultCode === 0) {
-                dispatch(toggleInFollowingProgress(false, id))
+                dispatch(toggleInFollowingProgress(false, id));
+                dispatch(setFriendDataTC(true));
+                if (isFollowed === 'true') {
+                    dispatch(useSelectorsTC(null, isFollowed, pageSize))
+                }
             }
             dispatch(followChanged(id, followStatus = false));
         }

@@ -4,7 +4,7 @@ import { useParams, Navigate } from 'react-router-dom'
 import React, { useEffect } from "react";
 import Profile from "./Main";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
-import { setUsersTC, getUsersStatusTC, setUsersStatusTC } from "../../redux/profile-reducer";
+import { setUsersTC, getUsersStatusTC, setUsersStatusTC, setNewProfilePhotoTC, setNewUserInfoTC } from "../../redux/profile-reducer";
 import { compose } from "redux";
 
 
@@ -38,6 +38,15 @@ class ProfileContainer extends React.Component {
         this.props.setUsersStatusTC(status)
     }
 
+    changeProfilePhoto = (photoFile) => {
+        this.props.setNewProfilePhotoTC(photoFile)
+    }
+
+    changeUserInfo = (data) => {
+        this.props.setNewUserInfoTC(data)
+    }
+
+
     componentDidUpdate(prevProps) {
         let userId = this.props.match.params.userId;
         if (!userId && userId !== prevProps.match.params.userId) {
@@ -52,7 +61,7 @@ class ProfileContainer extends React.Component {
 
     render() {
         if (!this.props.authProfileId && !this.props.match.params.userId) return <Navigate to={'/login'} />
-        return <Profile {...this.props} onSetUsersStatus={this.onSetUsersStatus} />
+        return <Profile {...this.props} changeUserInfo={this.changeUserInfo} onSetUsersStatus={this.onSetUsersStatus} changeProfilePhoto={this.changeProfilePhoto} />
     }
 }
 
@@ -70,7 +79,8 @@ let mapStateToProps = (state) => ({
     authProfileId: state.auth.userId,
     status: state.profilePage.status,
     isAuth: state.auth.isAuth,
-    initialized: state.app.initialized
+    initialized: state.app.initialized,
+    awaitResponseInfo: state.profilePage.awaitResponseInfo
 })
 
 function withRouter(ProfCont) {
@@ -90,7 +100,7 @@ function withRouter(ProfCont) {
 // конвейер функций создающих контейнеры вызываем дважды, первый раз передаем функции создающие контейнеры, второй раз передаю компоненту которую необходимо обернуть контейнерами
 
 export default compose(
-    connect(mapStateToProps, { setUsersTC, getUsersStatusTC, setUsersStatusTC }),
+    connect(mapStateToProps, { setUsersTC, getUsersStatusTC, setUsersStatusTC, setNewProfilePhotoTC, setNewUserInfoTC }),
     withRouter,
     // withAuthRedirect,
 )(ProfileContainer)

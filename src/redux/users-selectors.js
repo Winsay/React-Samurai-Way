@@ -47,3 +47,9 @@ export const getIsFetching = (state) => {
 export const getFollowingInProgress = (state) => {
     return state.usersPage.followingInProgress
 }
+export const getIsFollowed = (state) => {
+    return state.usersPage.isFollowed
+}
+export const getSearchInputValue = (state) => {
+    return state.usersPage.searchInputValue
+}

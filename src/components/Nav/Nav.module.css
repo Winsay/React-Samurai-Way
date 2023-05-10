@@ -3,6 +3,7 @@
     background-color: #32a33d;
     height: 90.1vh;
     font-size: 24px;
+    max-width: 17vw;
 }
 
 .navList {
@@ -52,6 +53,7 @@
 }
 
 .friends {
+    max-width: 20vw;
     padding: 5px;
     display: flex;
     justify-content: space-around;

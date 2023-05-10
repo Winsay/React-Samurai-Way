@@ -32,7 +32,7 @@
 .messages::after {
     position: absolute;
     content: '';
-    background-image: url(../../../public/img/messages-bg.jpg);
+    background-image: url(../../assets/img/messages-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     opacity: 0.8;
@@ -91,7 +91,7 @@ textarea {
     top: 3px;
     width: 18px;
     height: 16px;
-    background-image: url('../../../public/img/warning.svg');
+    background-image: url('../../assets/img/warning.svg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -103,7 +103,7 @@ textarea {
     position: absolute;
     bottom: 25px;
     right: 180px;
-    background-image: url('../../../public/img/send.svg');
+    background-image: url('../../assets/img/send.svg');
     background-repeat: no-repeat;
     background-size: 24px 24px;
     background-position-x: 50%;

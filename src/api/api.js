@@ -10,9 +10,9 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-    getUsers(curentPage, pageSize) {
+    getUsers(curentPage, pageSize, isFollowed, searchInputValue) {
         return (
-            instance.get(`users?page=${curentPage}&count=${pageSize}`)
+            instance.get(`users?page=${curentPage}&count=${pageSize}${isFollowed !== 'null' ? `&friend=${isFollowed}` : ''}${searchInputValue ? `&term=${searchInputValue}` : ''}`)
                 .then(response => {
                     return (
                         response.data)
@@ -39,7 +39,9 @@ export const usersAPI = {
 export const profileAPI = {
     setUsersProfile(userId) {
         return instance.get(`profile/${userId}`)
-            .then(response => response.data)
+            .then(response => {
+                return response.data
+            })
     },
     getUsersStatus(userId) {
         return instance.get(`profile/status/${userId}`)
@@ -48,8 +50,18 @@ export const profileAPI = {
     setUsersStatus(status) {
         return instance.put('profile/status', { status })
             .then(response => response.data)
+    },
+    setNewProfilePhoto(photoFile) {
+        const formData = new FormData();
+        formData.append('image', photoFile)
+        return instance.put('profile/photo', formData)
+            .then(response => response.data)
+    },
+    setNewUserInfo(data) {
+        let { aboutMe, lookingForAJob, lookingForAJobDescription, website, github, twitter, instagram, userId, fullName } = data;
+        return instance.put('profile', { fullName, aboutMe, userId, lookingForAJob, lookingForAJobDescription, Contacts: { github, website, twitter, instagram } })
+            .then(response => response.data)
     }
-
 }
 
 export const authAPI = {
@@ -62,11 +74,16 @@ export const authAPI = {
             .then(response => response.data)
     },
     loginingProces(data) {
-        return instance.post('auth/login', data)
+        debugger
+        return instance.post('auth/login', { password: data.password, email: data.email, rememberMe: data.rememberMe, captcha: data.captcha })
             .then(response => response.data)
     },
     logoutProces() {
         return instance.delete('auth/login')
+            .then(response => response.data)
+    },
+    getChaptchaURL() {
+        return instance.get('/security/get-captcha-url')
             .then(response => response.data)
     }
 }

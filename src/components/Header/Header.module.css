@@ -55,6 +55,8 @@
 }
 
 .logoutBtn {
+    padding: 0 5px;
+    border-radius: 5px;
     border: 0;
     background-color: #3300eb;
     font-weight: 500;

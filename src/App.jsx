@@ -1,7 +1,7 @@
 import './App.css';
 import React, { Suspense, lazy } from 'react';
 import ProfileContainer from './components/Main/ProfileContainer';
-import { Route, Routes, useParams, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes, useParams, BrowserRouter } from 'react-router-dom';
 // import MessagesContainer from './components/Messages/MessagesContainer';
 // import UsersContainer from './components/Users/UsersContainer'
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -12,6 +12,7 @@ import { initializationAppTC } from './redux/app-reducer ';
 import PreloaderSpinner from './components/common/preloader/PreloaderSpinner';
 import NavComponent from './components/Nav/NavContainer';
 import store from './redux/redux-store';
+import NotFoundComponent from './components/NotFound/NotFoundPage';
 
 
 const UsersContainer = lazy(() => import('./components/Users/UsersContainer'))
@@ -53,9 +54,11 @@ class App extends React.Component {
                   element={<UsersContainer />} />
                 <Route path='/login'
                   element={<LoginContainer />} />
+                <Route path='*'
+                  element={<NotFoundComponent />}
+                />
               </Routes>
             </Suspense>
-
           </div>
         </div>
       </div >
@@ -75,12 +78,14 @@ const AppContainer = compose(
 )(App)
 
 
+// basename={process.env.PUBLIC_URL}
+
 const SamuraiJSApp = (props) => {
-  return <Router>
+  return <BrowserRouter>
     <Provider store={store}>
       <AppContainer />
     </Provider>
-  </Router>
+  </BrowserRouter>
 }
 
 export default SamuraiJSApp;

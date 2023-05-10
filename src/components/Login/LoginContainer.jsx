@@ -5,13 +5,15 @@ import Login from "./Login";
 let mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
-        errorMessage: state.auth.errorMessage
+        errorMessage: state.auth.errorMessage,
+        captchaURL: state.auth.captchaURL,
     }
 }
 
 const userLogin = (data) => {
-    const { rememberMe, email, password } = data
-    return loginUserTC({ email, password, rememberMe });
+    debugger;
+    const { captchaValue, email, password, rememberMe } = data;
+    return loginUserTC({ email, password, rememberMe, captcha: captchaValue });
 }
 
 

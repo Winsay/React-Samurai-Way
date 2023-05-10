@@ -5,6 +5,12 @@
 
 .infoLogo {
     margin-right: 30px;
+    position: relative;
+}
+
+.infoLogo:hover .addPhotoWrapp label {
+    visibility: visible;
+    opacity: 1;
 }
 
 .infoLogo img {
@@ -13,9 +19,54 @@
     max-height: 100%;
 }
 
+.addPhotoWrapp {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.addProfilePhoto {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.addPhotoWrapp label {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    background-color: green;
+    transition: background-color .3s ease-in-out, opacity .3s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.addPhotoWrapp label:hover {
+    background-color: rgb(0, 105, 0);
+}
+
+.addPhotoWrapp label span {
+    font-weight: 500;
+    font-size: 16px;
+    display: block;
+    padding: 15px 10px;
+    color: #fff;
+}
+
+.addPhotoWrapp label span:hover {
+    background-color: transparent;
+}
+
+
 .infoText {
     max-height: inherit;
+    position: relative;
 }
+
+.infoText .PreloaderWrapp {
+    width: 100%;
+}
+
 
 .profileNameStatus {
     margin-bottom: 10px;
@@ -30,6 +81,7 @@
 }
 
 .profileInfo {
+    position: relative;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -50,4 +102,89 @@
     font-size: 24px;
     font-weight: 700;
     margin: 0;
+}
+
+.btnWrapper {
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+}
+
+.userInfoChangeBtn {
+    border: 1px solid #000;
+    padding: 10px 20px;
+    background-color: #32a33d;
+    color: #fff;
+    transition: all .3s ease-in-out;
+}
+
+.userInfoChangeBtn:hover {
+    background-color: #298132;
+}
+
+.userInfoChangeBtn p {
+    text-orientation: upright;
+    writing-mode: vertical-lr;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px;
+}
+
+
+.userInfoForm {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+}
+
+.userInfoForm div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userInfoForm div label {
+    flex: 1 1 40%;
+    margin-right: 3px;
+}
+
+.userInfoForm div input {
+    flex: 1 1 50%;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.userInfoForm .formCheckBox {
+    justify-content: flex-start;
+}
+
+.userInfoForm .formCheckBox label {
+    flex: 0 1 37%;
+}
+
+.userInfoForm .formCheckBox input {
+    cursor: pointer;
+    margin: 0;
+    align-self: center;
+    flex: 0;
+}
+
+.formSubmit {
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.formSubmit input {
+    cursor: pointer;
+    padding: 3px 0;
+    flex: 1 1 100%;
+    background-color: rgb(2, 177, 2);
+    color: #fff;
+    font-size: 16px;
+    border: 1px solid rgb(2, 102, 2);
+    transition: all .3s ease-in-out;
+}
+
+.formSubmit input:hover {
+    background-color: rgb(2, 102, 2);
 }

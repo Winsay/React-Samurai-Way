@@ -1,4 +1,4 @@
-import { profileAPI } from "../api/api";
+import { usersAPI } from "../api/api";
 const SET_FRIENDS = 'social-network/friends/SET-FRIENDS'
 
 
@@ -20,14 +20,29 @@ const friendReducer = (state = initialState, action) => {
 const setFriendAC = (friendData) => ({ type: SET_FRIENDS, friendData })
 
 
-export const setFriendDataTC = (usersCount) => async (dispatch) => {
-    const result = [];
-    for (let i = 0; i < 3; i++) {
-        let randomId = Math.round((Math.random() * usersCount));
-        let friendData = await profileAPI.setUsersProfile(randomId);
-        result.push({ id: friendData.userId, name: friendData.fullName, photo: friendData.photos.small })
+export const setFriendDataTC = (isAuth) => async (dispatch) => {
+    debugger;
+    if (isAuth) {
+        const result = [];
+        let friendsData = await usersAPI.getUsers(1, 3, 'true');
+        for (let i = 0; i < 3; i++) {
+            result.push({ id: friendsData.items[i].id, name: friendsData.items[i].name, photo: friendsData.items[i].photos.small })
+        };
+        dispatch(setFriendAC(result))
+    } else {
+        dispatch(setFriendAC([]))
     }
-    dispatch(setFriendAC(result))
+
+
+
+
+    // for (let i = 0; i < 3; i++) {
+    //     let randomId = Math.round((Math.random() * usersCount));
+    //     let friendsCount = await usersAPI.getUsers(randomId);
+    //     result.push({ id: friendData.userId, name: friendData.fullName, photo: friendData.photos.small })
+    // }
+
+    // dispatch(setFriendAC(result))
 }
 
 export default friendReducer;

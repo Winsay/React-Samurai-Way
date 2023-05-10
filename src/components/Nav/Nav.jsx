@@ -26,19 +26,19 @@ export default function Nav(props) {
                     </NavLink>
                 </li>
                 <li className={style.navItem}>
-                    <a href="/news" className={style.navLink}>
+                    <NavLink to='/news' className={({ isActive }) => (isActive ? style.active : style.navLink)}>
                         News
-                    </a>
+                    </NavLink>
                 </li>
                 <li className={style.navItem}>
-                    <a href="/music" className={style.navLink}>
+                    <NavLink to='/music' className={({ isActive }) => (isActive ? style.active : style.navLink)}>
                         Music
-                    </a>
+                    </NavLink>
                 </li>
                 <li className={style.navItem}>
-                    <a href="/settings" className={style.navLink}>
+                    <NavLink to='/settings' className={({ isActive }) => (isActive ? style.active : style.navLink)}>
                         Settings
-                    </a>
+                    </NavLink>
                 </li>
             </ul>
             <h3 className={style.friendsTitle}>Friends</h3>

@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { getUsersThunkCreator, changePageTC, showMoreTC, changeFollowTC } from "../../redux/users-reducer";
+import { getUsersThunkCreator, changePageTC, showMoreTC, changeFollowTC, useSelectorsTC } from "../../redux/users-reducer";
 import axios from "axios";
 import React from "react";
 import UsersFunc from "./UsersFunc";
@@ -14,7 +14,9 @@ import {
     getTotalUsersCount,
     getCurentPage,
     getIsFetching,
-    getFollowingInProgress
+    getFollowingInProgress,
+    getIsFollowed,
+    getSearchInputValue
 } from "../../redux/users-selectors";
 
 
@@ -31,7 +33,7 @@ class UsersAPIComponent extends React.Component {
 
 
     onChangePage = (newPage) => {
-        this.props.changePageTC(newPage, this.props.pageSize);
+        this.props.changePageTC(newPage, this.props.pageSize, this.props.isFollowed, this.props.searchInputValue);
 
         // this.props.toggleIsFetching(true);
         // this.props.setPage(newPage);
@@ -45,9 +47,9 @@ class UsersAPIComponent extends React.Component {
     onShowMore = async (pagesCount) => {
         if (pagesCount / 2 < this.props.curentPage) {
             await this.props.changePageTC(Math.ceil(this.props.curentPage / 2), this.props.pageSize);
-            this.props.showMoreTC(Math.ceil(this.props.curentPage), this.props.pageSize);
+            this.props.showMoreTC(Math.ceil(this.props.curentPage), this.props.pageSize, this.props.isFollowed, this.props.searchInputValue);
         } else {
-            this.props.showMoreTC(this.props.curentPage, this.props.pageSize);
+            this.props.showMoreTC(this.props.curentPage, this.props.pageSize, this.props.isFollowed, this.props.searchInputValue);
         }
 
 
@@ -59,10 +61,14 @@ class UsersAPIComponent extends React.Component {
         // });
     }
 
+    onUsingSelectors = (searchInputValue, isFollowed) => {
+        this.props.useSelectorsTC(searchInputValue, isFollowed, this.props.pageSize)
+    }
+
     onChangeFollow = (id) => {
         // правильный вариант в которым UI компонента не занимается запросами на сервер и не производит их менеджмент, а просто вызывает коллбэк функцию
 
-        this.props.changeFollowTC(id)
+        this.props.changeFollowTC(id, this.props.isFollowed, this.props.pageSize)
 
 
         // этот вариант так же является неправильным, так как хоть мы и вынесли запросы в DAL(data access layer), но все равно менеджмент респонсов происходит в UI ккомпоненте, что является некоректным
@@ -114,7 +120,7 @@ class UsersAPIComponent extends React.Component {
 
     render() {
         return (
-            <UsersFunc props={this.props} onChangePage={this.onChangePage} onShowMore={this.onShowMore} onChangeFollow={this.onChangeFollow} />
+            <UsersFunc props={this.props} onChangePage={this.onChangePage} onShowMore={this.onShowMore} onChangeFollow={this.onChangeFollow} onUsingSelectors={this.onUsingSelectors} />
         )
     }
 }
@@ -127,8 +133,11 @@ let mapStateToProps = (state) => {
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         curentPage: getCurentPage(state),
+        isFollowed: getIsFollowed(state),
+        searchInputValue: getSearchInputValue(state),
         isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state)
+        followingInProgress: getFollowingInProgress(state),
+        isAuth: state.auth.isAuth
 
         // usersInfo: state.usersPage.userInfo,
         // pageSize: state.usersPage.pageSize,
@@ -178,7 +187,7 @@ let mapStateToProps = (state) => {
 
 
 const UsersContainer = compose(
-    connect(mapStateToProps, { getUsersThunkCreator, changePageTC, showMoreTC, changeFollowTC, }),
+    connect(mapStateToProps, { getUsersThunkCreator, changePageTC, showMoreTC, changeFollowTC, useSelectorsTC }),
     // withAuthRedirect
 )(UsersAPIComponent)
 

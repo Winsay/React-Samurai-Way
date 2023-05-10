@@ -126,3 +126,22 @@ span:hover {
 .paginatorRight span:hover {
     background-color: inherit;
 }
+
+.usersSelector {
+    display: flex;
+}
+
+.usersSelector input {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+
+.usersSelector select {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.usersSelector button {
+    font-size: 16px;
+}

@@ -3,14 +3,15 @@ import style from "./User.module.css";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { usersAPI } from "../../../api/api";
+import avatar from '../../../assets/img/avatar.png'
+
 
 
 
 
 export default function User(props) {
-
     const changeFollow = () => {
-        props.onChangeFollow(props.id)
+        props.onChangeFollow(props.id);
     }
     // const onChangeFollow = () => {
     //     usersAPI.followChange.followedCheck(props.id).then(response => {
@@ -52,9 +53,9 @@ export default function User(props) {
         <div className={style.user}>
             <div className={style.userLeft}>
                 <NavLink to={`/profile/${props.id}`}>
-                    <img src={props.photo ? props.photo : 'img/avatar.png'} alt="face" className={style.userPic} />
+                    <img src={props.photo ? props.photo : avatar} alt="face" className={style.userPic} />
                 </NavLink>
-                <button disabled={props.followingInProgress.some(id => id === props.id)} onClick={changeFollow} className={props.follow ? style.userFollow : style.userUnfollow} >{props.followingInProgress.some(id => id === props.id) ? 'Wait....' : `${props.follow ? 'Followed' : 'Unfollowed'}`}</button>
+                <button disabled={props.followingInProgress.some(id => id === props.id) || !props.isAuth} onClick={changeFollow} className={props.follow ? style.userFollow : style.userUnfollow} >{props.followingInProgress.some(id => id === props.id) ? 'Wait....' : `${props.follow ? 'Followed' : 'Unfollowed'}`}</button>
             </div>
             <div className={style.userRight}>
                 <div className={style.userInfoTop}>
@@ -66,8 +67,7 @@ export default function User(props) {
                 </div>
                 <div className={style.userInfoBot}>
                     <p className={style.status}>
-                        {/* {props.status} */}
-                        Статус
+                        {props.status || 'Without status'}
                     </p>
                 </div>
             </div>

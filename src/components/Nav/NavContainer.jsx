@@ -7,9 +7,13 @@ import { setFriendDataTC } from "../../redux/friend-reducer";
 class NavContainer extends React.Component {
 
     componentDidMount() {
-        this.props.setFriendDataTC(this.props.totalUsersCount)
+        this.props.setFriendDataTC(this.props.isAuth)
     }
-
+    componentDidUpdate(prevProps) {
+        if (prevProps.isAuth !== this.props.isAuth) {
+            this.props.setFriendDataTC(this.props.isAuth)
+        }
+    }
 
     render() {
         return <Nav friends={this.props.friends} />
@@ -19,7 +23,8 @@ class NavContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         totalUsersCount: state.usersPage.totalUsersCount,
-        friends: state.friendsReducer.friends
+        friends: state.friendsReducer.friends,
+        isAuth: state.auth.isAuth,
     }
 }
 

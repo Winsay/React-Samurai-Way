@@ -65,13 +65,29 @@ const LoginForm = (props) => {
             <div className={style.errorMessage}>
                 {props.errorMessage ? <p>{props.errorMessage}</p> : ''}
             </div>
+            {props.captchaURL ?
+                <>
+                    <div className={style.captchaField}>
+                        <img src={props.captchaURL} alt="captcha" />
+                        <input
+                            {...register('captchaValue', {
+                                required: 'Поле обязательно к заполнению'
+                            })}
+                            type="text"
+                            placeholder="Enter captcha" />
+                        <div className={style.errorMessage}>
+                            {errors?.captchaValue && <p>{errors?.captchaValue?.message || 'Error'}</p>}
+                        </div>
+                    </div>
+                </>
+                : ''
+            }
         </form>
     )
 }
 
 
 export default function Login(props) {
-    debugger;
     if (props.isAuth) {
         return <Navigate to={'/profile'} />
     }
